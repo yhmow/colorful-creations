@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A1B33'/%3E%3Cg fill='%23F6A81C'%3E%3Cellipse cx='32' cy='15' rx='7' ry='11'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(288 32 32)'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='8' fill='%23F2543F'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Lora:ital,wght@0,500..700;1,500..700&family=Source+Sans+3:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
 
 <!-- Safety net: any image that fails to load is swapped for an illustrated card, so a broken photo never appears. -->
 <script>
@@ -315,9 +315,10 @@ window.ccFallback = function (img) {
   --shadow:0 16px 40px -12px rgba(42,27,51,.10);
   --shadow-soft:0 8px 22px -14px rgba(42,27,51,.26);
   --shadow-lg:0 30px 64px -28px rgba(42,27,51,.36);
-  --serif:'Bricolage Grotesque',Georgia,'Times New Roman',serif;
-  --rounded:'Figtree',system-ui,sans-serif;
-  --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Lora',Georgia,'Times New Roman',serif;
+  --accent:'Caprasimo','Lora',Georgia,serif;
+  --rounded:'Source Sans 3',system-ui,sans-serif;
+  --sans:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
   --spring:cubic-bezier(.34,1.45,.5,1);
   --maxw:1160px;
@@ -335,6 +336,7 @@ body{
     radial-gradient(860px 640px at 50% 112%, rgba(227,244,252,.95), transparent 58%);
   background-attachment:fixed;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-variant-ligatures:none;font-feature-settings:'liga' 0,'dlig' 0,'calt' 0,'ss01' 0,'salt' 0;
 }
 main{position:relative}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.14;letter-spacing:-.015em;margin:0 0 .5em;color:var(--ink)}
@@ -433,7 +435,7 @@ section[id],form[id],div[id]{scroll-margin-top:112px}
 .brand-mark{width:44px;height:44px;border-radius:15px;overflow:hidden;box-shadow:var(--shadow-soft);flex-shrink:0}
 .brand-mark svg{display:block;width:100%;height:100%}
 .brand-text{display:flex;flex-direction:column;line-height:1.1}
-.brand-text strong{font-family:var(--serif);font-size:1.12rem;font-weight:600;letter-spacing:-.02em}
+.brand-text strong{font-family:var(--accent);font-size:1.18rem;font-weight:400;letter-spacing:0}
 .brand-text small{font-family:var(--rounded);font-size:.63rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
 .nav{
   position:relative;display:flex;gap:3px;margin-inline:auto;align-items:center;padding:6px;
@@ -531,7 +533,8 @@ section[id],form[id],div[id]{scroll-margin-top:112px}
   padding:clamp(34px,5vw,62px) 0 clamp(20px,3vw,34px);position:relative;
 }
 .hero-copy .stickers{margin-bottom:22px}
-.hero h1 em{font-style:italic;color:var(--blush-deep);position:relative;white-space:nowrap}
+p b,p strong,li b{font-size:inherit}
+.hero h1 em{font-style:italic;color:var(--blush-deep);position:relative;white-space:normal;display:inline}
 .hero h1 em::after{
   content:'';position:absolute;left:0;right:0;bottom:.02em;height:.3em;border-radius:99px;
   background:linear-gradient(90deg,rgba(246,168,28,.4),rgba(242,84,63,.35));z-index:-1;
@@ -800,33 +803,91 @@ section[id],form[id],div[id]{scroll-margin-top:112px}
 .artist .btn{align-self:flex-start}
 
 /* ============ Lightbox ============ */
+/* ============ Fullscreen lightbox viewer ============ */
 .lightbox{
-  position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px;
-  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  position:fixed;left:0;top:0;right:0;bottom:0;
+  height:100vh;height:100dvh;
+  z-index:120;display:grid;place-items:center;padding:24px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,visibility 0s linear .3s;
 }
-.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease,visibility 0s}
 .lightbox-backdrop{
-  position:absolute;inset:0;background:rgba(42,27,51,.62);
+  position:absolute;inset:0;background:rgba(23,15,27,.92);
 }
 .lightbox-card{
-  position:relative;margin:0;background:var(--paper);border-radius:var(--r-md);
-  padding:16px 16px 20px;width:min(620px,92vw);box-shadow:var(--shadow-lg);
-  border:1.5px solid rgba(255,255,255,.9);
-  transform:translateY(16px) scale(.96);transition:transform .4s var(--spring);
-  max-height:88vh;overflow:auto;
+  position:relative;margin:0;background:transparent;border:0;padding:0;box-shadow:none;
+  width:100%;height:100%;max-height:none;overflow:visible;
+  display:grid;grid-template-rows:1fr auto;gap:10px;
+  transform:none;transition:none;
 }
-.lightbox.open .lightbox-card{transform:translateY(0) scale(1)}
-.lightbox-media{border-radius:var(--r-sm);overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--canvas)}
-.lightbox-media svg,.lightbox-media img{width:100%;height:100%;display:block;object-fit:cover}
+.lightbox-media{
+  position:relative;background:transparent;border-radius:0;aspect-ratio:auto;overflow:visible;
+  display:grid;place-items:center;min-height:0;min-width:0;
+}
+.lightbox-media img,.lightbox-media svg{
+  max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;
+  /* the media row can size to the image's intrinsic height, so cap the image
+     against the viewport too, keeps landscape/short windows fully on screen */
+  max-height:calc(100vh - 110px);
+  max-height:calc(100dvh - 110px);
+  transform-origin:center center;
+  filter:drop-shadow(0 22px 50px rgba(0,0,0,.55));
+}
 .lightbox-card figcaption{
-  padding:15px 6px 0;font-family:var(--serif);font-size:1.05rem;color:var(--ink);text-align:center;
+  padding:0 8px 4px;font-family:var(--serif);font-size:clamp(.95rem,2.2vw,1.15rem);
+  color:#FFFDF9;text-align:center;text-shadow:0 1px 10px rgba(0,0,0,.75);
+  min-height:1.4em;
 }
 .lightbox-close{
-  position:absolute;top:-14px;right:-14px;width:44px;height:44px;border-radius:var(--r-pill);
-  background:var(--ink);color:#FFFDF9;border:2px solid var(--paper);font-size:1.3rem;
-  line-height:1;cursor:pointer;box-shadow:var(--shadow);transition:transform .3s var(--spring);
+  position:absolute;
+  top:calc(14px + env(safe-area-inset-top,0px));
+  right:calc(14px + env(safe-area-inset-right,0px));
+  width:44px;height:44px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.14);color:#FFFFFF;border:1.5px solid rgba(255,255,255,.5);
+  font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:none;
+  display:grid;place-items:center;z-index:3;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:transform .3s var(--spring),background .2s ease;
 }
-.lightbox-close:hover{transform:rotate(90deg) scale(1.08)}
+.lightbox-close:hover{transform:rotate(90deg) scale(1.08);background:rgba(255,255,255,.26)}
+.lb-count{
+  position:absolute;
+  top:calc(24px + env(safe-area-inset-top,0px));
+  left:calc(18px + env(safe-area-inset-left,0px));
+  color:#FFFFFF;font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.08em;
+  background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);
+  padding:7px 13px;border-radius:var(--r-pill);z-index:3;min-height:20px;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.lb-count:empty{display:none}
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.14);color:#FFFFFF;border:1.5px solid rgba(255,255,255,.45);
+  cursor:pointer;display:grid;place-items:center;z-index:3;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:background .2s ease,transform .2s ease;
+}
+.lb-nav:hover{background:rgba(255,255,255,.28)}
+.lb-nav:active{transform:translateY(-50%) scale(.94)}
+.lb-nav[hidden]{display:none}
+.lb-prev{left:calc(14px + env(safe-area-inset-left,0px))}
+.lb-next{right:calc(14px + env(safe-area-inset-right,0px))}
+
+@media (max-width:640px){
+  .lightbox{padding:14px}
+  .lb-nav{width:44px;height:44px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-count{top:calc(14px + env(safe-area-inset-top,0px));left:calc(12px + env(safe-area-inset-left,0px))}
+}
+@media (max-height:560px){
+  .lightbox{padding:10px 62px}
+  .lightbox-card figcaption{font-size:.9rem}
+  .lb-count{top:calc(8px + env(safe-area-inset-top,0px))}
+  .lightbox-close{top:calc(8px + env(safe-area-inset-top,0px))}
+}
 
 /* ============ Forms ============ */
 .form-card{
@@ -1129,6 +1190,10 @@ fieldset.field{border:0;padding:0}
   .ftr-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:940px){
+  html{overflow-x:clip}
+  .grid-2,.grid-3,.contact-grid,.combo,.hero,.hero-grid,.page-hero .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hero>*{min-width:0}
+  .grid-2>*,.grid-3>*,.contact-grid>*,.combo>*,.hero-grid>*{min-width:0}
   .hdr-inner{gap:12px}
   .brand-text{max-width:44vw}
   .nav{
@@ -1158,10 +1223,20 @@ fieldset.field{border:0;padding:0}
   .form-grid{grid-template-columns:1fr}
   .lightbox-card{width:min(560px,94vw)}
 }
+@media (max-width:400px){
+  .hdr-actions>.btn{display:none}
+  .nav-cta{display:block!important}
+}
 @media (max-width:640px){
   body{font-size:16px}
   .brand-text small{display:none}
-  .hdr-actions .btn{padding:11px 17px;font-size:.83rem}
+  .hdr-actions .btn{padding:10px 14px;font-size:.8rem}
+  .hdr-inner{justify-content:space-between;gap:14px}
+  .brand{gap:9px;min-width:0}
+  .brand-mark{width:38px;height:38px;border-radius:13px}
+  .brand-text{max-width:none}
+  .brand-text strong{font-size:1.02rem;white-space:nowrap}
+  .hdr-actions{gap:10px}
   .grid-4{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
   .ss-btn{width:40px;height:40px}
@@ -1235,6 +1310,7 @@ fieldset.field{border:0;padding:0}
       <button class="nav-link" data-nav="face">Face Painting</button>
       <button class="nav-link" data-nav="art">Art</button>
       <button class="nav-link" data-nav="about">About &amp; Contact</button>
+      <button class="btn btn-coral nav-cta" data-nav="about" data-focus="inquiryForm" style="display:none">Book / Inquire</button>
     </nav>
 
     <div class="hdr-actions">
@@ -1297,7 +1373,7 @@ fieldset.field{border:0;padding:0}
           <span class="art-chip">Homegrown blooms</span>
         </div>
         <div class="art-card art-card-2">
-          <div class="ph"><img src="./img/IMG_3060.webp" alt="Cosmos flower design for face painting" data-art="face" data-seed="6" data-label="Party face painting" onerror="ccFallback(this)" /></div>
+          <div class="ph"><img src="./img/Rainbow_butterfly.webp" alt="Girl with rainbow butterfly face paint" data-art="face" data-seed="6" data-label="Party face painting" onerror="ccFallback(this)" /></div>
           <span class="art-chip">Party face painting</span>
         </div>
         <div class="art-card art-card-3">
@@ -1322,7 +1398,7 @@ fieldset.field{border:0;padding:0}
 
       <div class="grid-3">
         <article class="pillar pillar-emerald reveal">
-          <div class="ph pillar-photo"><img src="./img/IMG_4676.webp" alt="Homegrown bouquet in a mason jar" data-art="bouquet" data-seed="12" data-label="Homegrown flowers" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="ph pillar-photo"><img src="./img/IMG_4679.webp" alt="Homegrown bouquet in a mason jar" data-art="bouquet" data-seed="12" data-label="Homegrown flowers" loading="lazy" onerror="ccFallback(this)" /></div>
           <h3>Homegrown Seasonal Flowers</h3>
           <p>Cut fresh from our Plattsburgh plot and local growing partners, never shipped in from a wire service.</p>
           <ul class="checks tight">
@@ -1336,7 +1412,7 @@ fieldset.field{border:0;padding:0}
         </article>
 
         <article class="pillar pillar-coral reveal">
-          <div class="ph pillar-photo"><img src="./img/Cosmos white.webp" alt="Cosmos flower face-painting design" data-art="face" data-seed="7" data-label="Face painting" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="ph pillar-photo"><img src="./img/IMG_5097.webp" alt="Two friends with red and white clown face paint" data-art="face" data-seed="7" data-label="Face painting" loading="lazy" onerror="ccFallback(this)" /></div>
           <h3>Event &amp; Party Face Painting</h3>
           <p>Professional, skin-safe designs for birthdays, schools, libraries, fundraisers, shop openings &amp; campus events.</p>
           <ul class="checks tight">
@@ -1759,7 +1835,7 @@ fieldset.field{border:0;padding:0}
           </div>
         </div>
         <div class="hero-panel reveal">
-          <div class="art-slot" data-art="bloom" data-seed="9"><img src="./img/Hanging Out.webp" alt="Hanging Out, the featured pilot artwork" data-art="hanging" data-seed="8" data-label="Hanging Out" onerror="ccFallback(this)" /></div>
+          <div class="art-slot" data-art="hanging" data-seed="8"></div>
         </div>
       </div>
     </section>
@@ -1774,7 +1850,7 @@ fieldset.field{border:0;padding:0}
       <div class="grid-3">
         <article class="artist reveal">
           <div class="ph">
-            <img src="./img/Hanging Out.webp" alt="Hanging Out, the featured piece by Elena Moreau"
+            <img src="./img/Hanging_Out.webp" alt="Hanging Out, the featured piece by Elena Moreau"
                  data-art="hanging" data-seed="8" data-label="Hanging Out" loading="lazy" onerror="ccFallback(this)" />
           </div>
           <div class="artist-body">
@@ -1790,9 +1866,11 @@ fieldset.field{border:0;padding:0}
         </article>
 
         <article class="artist reveal">
-          <div class="ph">
-            <img src="./img/landscape.webp" alt="Moody landscape piece featured by Marcus Reed"
-                 data-art="frame" data-seed="10" data-label="Barnwood Beacon" loading="lazy" onerror="ccFallback(this)" />
+          <div class="ph" data-placeholder="1" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,var(--butter-surface),#fff);text-align:center;cursor:default">
+            <div>
+              <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:66px;height:66px;margin:0 auto 10px;border-radius:50%;background:rgba(246,168,28,.22);color:var(--butter-deep);font-weight:800;font-size:1.35rem;letter-spacing:.03em">MR</span>
+              <span style="display:block;font-size:.85rem;color:var(--muted)">Artwork photo coming soon</span>
+            </div>
           </div>
           <div class="artist-body">
             <span class="artist-medium">Reclaimed wood sculpture</span>
@@ -1869,7 +1947,7 @@ fieldset.field{border:0;padding:0}
 
     <section class="combo reveal" id="artistApply">
       <div class="combo-art">
-        <div class="ph" style="border-radius:18px"><img src="./img/IMG_3759.webp" alt="Blossom painting from the artist showcase" data-art="frame" data-seed="17" data-label="Showcase piece" loading="lazy" onerror="ccFallback(this)" /></div>
+        <div class="ph" style="border-radius:18px"><div class="art-slot" data-art="frame" data-seed="17"></div></div>
       </div>
       <div class="combo-copy">
         <span class="tag tag-amber">[Collaborative commission terms: final at meeting]</span>
@@ -2119,10 +2197,13 @@ fieldset.field{border:0;padding:0}
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
   <div class="lightbox-backdrop" data-lb-close></div>
   <figure class="lightbox-card">
-    <button class="lightbox-close" type="button" data-lb-close aria-label="Close preview"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2.5 2.5l9 9M11.5 2.5l-9 9"/></svg></button>
     <div class="lightbox-media" id="lbMedia"></div>
     <figcaption id="lbCap"></figcaption>
   </figure>
+  <span class="lb-count" id="lbCount" aria-live="polite"></span>
+  <button class="lightbox-close" type="button" data-lb-close aria-label="Close preview"><svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2.5 2.5l9 9M11.5 2.5l-9 9"/></svg></button>
+  <button class="lb-nav lb-prev" type="button" aria-label="Previous photo" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-nav lb-next" type="button" aria-label="Next photo" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </div>
 
 <script>
@@ -2289,48 +2370,199 @@ fieldset.field{border:0;padding:0}
     if (e.key === 'Escape') { closeDrawer(); closeLightbox(); }
   });
 
-  /* Lightbox */
-  var lb = $('#lightbox'), lbMedia = $('#lbMedia'), lbCap = $('#lbCap'), lbOpener = null;
-  function openLightbox(srcNode, caption) {
-    if (!lb || !srcNode) return;
+  /* ============ Fullscreen lightbox ============ */
+  var lb = $('#lightbox'), lbMedia = $('#lbMedia'), lbCap = $('#lbCap'), lbCount = $('#lbCount'),
+      lbOpener = null, lbEntries = [], lbIndex = 0, lbScrollY = 0, lbScale = 1;
+  var lbPrev = $('.lb-prev', lb), lbNext = $('.lb-next', lb);
+
+  function lbFigCap(fig) {
+    var fc = $('figcaption', fig);
+    if (!fc) return '';
+    var tmp = fc.cloneNode(true);
+    $$('.g-cat', tmp).forEach(function (n) { n.remove(); });
+    return tmp.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function lbNodeOf(entry) {
+    var n = entry && entry.node;
+    if (!n) return null;
+    if (n.matches && n.matches('img,svg')) return n;
+    return n.querySelector('img,svg');
+  }
+
+  function lbRender() {
+    var e = lbEntries[lbIndex];
+    if (!e) return;
+    var src = lbNodeOf(e);
     lbMedia.innerHTML = '';
-    var clone = srcNode.cloneNode(true);
-    clone.style.position = 'absolute';
-    clone.style.inset = '0';
-    lbMedia.appendChild(clone);
-    lbCap.textContent = caption || '';
+    if (src) {
+      var clone = src.cloneNode(true);
+      clone.className = '';
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+      clone.loading = 'eager';
+      clone.style.position = 'static';
+      clone.style.inset = '';
+      clone.style.width = '';
+      clone.style.height = '';
+      clone.style.transform = 'scale(' + lbScale + ')';
+      clone.style.transformOrigin = 'center center';
+      lbMedia.appendChild(clone);
+    }
+    lbCap.textContent = e.caption || '';
+    var n = lbEntries.length;
+    if (lbCount) lbCount.textContent = n > 1 ? (lbIndex + 1) + ' / ' + n : '';
+    if (lbPrev) lbPrev.hidden = n < 2;
+    if (lbNext) lbNext.hidden = n < 2;
+  }
+
+  function lbStep(d) {
+    if (lbEntries.length < 2) return;
+    lbIndex = (lbIndex + d + lbEntries.length) % lbEntries.length;
+    lbScale = 1;
+    lbRender();
+  }
+
+  function openLightbox(srcNode, caption, entries, index) {
+    if (!lb || !srcNode) return;
+    if (entries && entries.length) {
+      lbEntries = entries;
+      if (typeof index === 'number' && index >= 0) {
+        lbIndex = Math.min(index, entries.length - 1);
+      } else {
+        lbIndex = 0;
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].node === srcNode) { lbIndex = i; break; }
+        }
+      }
+    } else {
+      lbEntries = [{ node: srcNode, caption: caption || '' }];
+      lbIndex = 0;
+    }
+    lbScale = 1;
+    lbScrollY = window.scrollY || window.pageYOffset || 0;
+    lbRender();
     lb.classList.add('open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     lbOpener = document.activeElement;
     var closeBtn = $('.lightbox-close', lb);
-    if (closeBtn) closeBtn.focus();
+    if (closeBtn) { try { closeBtn.focus({ preventScroll: true }); } catch (err) { closeBtn.focus(); } }
   }
+
   function closeLightbox() {
     if (!lb || !lb.classList.contains('open')) return;
     lb.classList.remove('open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
-    if (lbOpener && lbOpener.focus) { try { lbOpener.focus(); } catch (e) {} }
+    /* return the page to the exact spot it was in before the viewer opened */
+    try { window.scrollTo(0, lbScrollY); } catch (err) {}
+    if (lbOpener && lbOpener !== document.body && lbOpener.focus) {
+      try { lbOpener.focus({ preventScroll: true }); } catch (err) { try { lbOpener.focus(); } catch (e2) {} }
+    } else if (document.activeElement && document.activeElement.blur) {
+      /* opener was the page itself (non-focusable tile): drop focus back to the document
+         instead of leaving it on the now-hidden close button */
+      try { document.activeElement.blur(); } catch (err) {}
+    }
     lbOpener = null;
+    lbEntries = []; lbIndex = 0; lbScale = 1;
+    if (lbCount) lbCount.textContent = '';
     setTimeout(function () { if (!lb.classList.contains('open') && lbMedia) lbMedia.innerHTML = ''; }, 320);
   }
+
+  /* arrows */
+  if (lbPrev) lbPrev.addEventListener('click', function () { lbStep(-1); });
+  if (lbNext) lbNext.addEventListener('click', function () { lbStep(1); });
+
+  /* keyboard navigation while open (Escape is handled globally) */
+  document.addEventListener('keydown', function (e) {
+    if (!lb || !lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); lbStep(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); lbStep(1); }
+    else if (e.key === 'Home') { e.preventDefault(); lbIndex = 0; lbScale = 1; lbRender(); }
+    else if (e.key === 'End') { e.preventDefault(); lbIndex = lbEntries.length - 1; lbScale = 1; lbRender(); }
+  });
+
+  /* keep Tab inside the dialog */
+  lb.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var f = $$('button:not([hidden])', lb);
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* touch: swipe between images, pinch to zoom (1x - 4x) */
+  var tX = 0, tY = 0, pinchStart = 0, scaleStart = 1, pinching = false;
+  lb.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 2) {
+      pinching = true;
+      pinchStart = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                              e.touches[0].clientY - e.touches[1].clientY);
+      scaleStart = lbScale;
+    } else if (e.touches.length === 1 && !pinching) {
+      tX = e.touches[0].clientX; tY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+  lb.addEventListener('touchmove', function (e) {
+    if (!pinching || e.touches.length !== 2 || !pinchStart) return;
+    var d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                       e.touches[0].clientY - e.touches[1].clientY);
+    lbScale = Math.max(1, Math.min(4, scaleStart * (d / pinchStart)));
+    var m = lbMedia.firstElementChild;
+    if (m) m.style.transform = 'scale(' + lbScale + ')';
+  }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (pinching) {
+      if (e.touches.length === 0) { pinching = false; pinchStart = 0; }
+      return;
+    }
+    if (e.changedTouches.length !== 1) return;
+    var dx = e.changedTouches[0].clientX - tX;
+    var dy = e.changedTouches[0].clientY - tY;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) lbStep(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* openers: gallery grid, artist cards */
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-lb-close]')) { closeLightbox(); return; }
+
     var fig = e.target.closest('.g-item');
     if (fig && !fig.classList.contains('is-hidden')) {
       var media = $('.ph', fig);
       if (media) {
-        var fc = $('figcaption', fig), cap = '';
-        if (fc) { var tmp = fc.cloneNode(true); tmp.querySelectorAll('.g-cat').forEach(function (n) { n.remove(); }); cap = tmp.textContent.replace(/\s+/g, ' ').trim(); }
-        openLightbox(media, cap);
+        var cap = lbFigCap(fig);
+        var gridEl = fig.closest('[data-grid]');
+        var entries = [], start = 0;
+        if (gridEl) {
+          $$('.g-item', gridEl).forEach(function (g) {
+            if (g.classList.contains('is-hidden')) return;
+            var m = $('.ph', g);
+            if (!m) return;
+            if (g === fig) start = entries.length;
+            entries.push({ node: m, caption: lbFigCap(g) });
+          });
+        }
+        if (entries.length) openLightbox(media, cap, entries, start);
+        else openLightbox(media, cap);
       }
       return;
     }
+
     var ph = e.target.closest('.artist .ph');
-    if (ph) {
-      var card = ph.closest('.artist');
-      var name = card ? $('h3', card) : null;
-      var med = card ? $('.artist-medium', card) : null;
-      openLightbox(ph, (name ? name.textContent : '') + (med ? ', ' + med.textContent : ''));
+    if (ph && !ph.dataset.placeholder) {
+      var aEntries = [], aStart = 0;
+      $$('#page-art .artist .ph').forEach(function (p) {
+        if (p.dataset.placeholder || !p.querySelector('img,svg')) return;
+        var c = p.closest('.artist');
+        var n = c ? $('h3', c) : null;
+        var md = c ? $('.artist-medium', c) : null;
+        if (p === ph) aStart = aEntries.length;
+        aEntries.push({ node: p, caption: (n ? n.textContent : '') + (md ? ', ' + md.textContent : '') });
+      });
+      if (aEntries.length) openLightbox(ph, '', aEntries, aStart);
+      else openLightbox(ph, '');
     }
   });
 
@@ -2566,7 +2798,6 @@ fieldset.field{border:0;padding:0}
       ['DSCF6696.webp', 'Table Blooms', 'Table Blooms'],
       ['DSCF7048.webp', 'Wedding Bouquets', 'Wedding Bouquets'],
       ['DSCF7204.webp', 'Flower Crown', 'Flower Crown'],
-      ['IMG_3727.webp', 'Spring Tulips', 'Spring Tulips'],
       ['IMG_3885.webp', 'Steps in Bloom', 'Steps in Bloom'],
       ['IMG_4040.webp', 'Market Jars', 'Market Jars'],
       ['IMG_4042.webp', 'Dahlia and Rose arrangement', 'Dahlia & Rose'],
@@ -2575,32 +2806,25 @@ fieldset.field{border:0;padding:0}
       ['IMG_4174.webp', 'Hydrangea Harvest', 'Hydrangea Harvest'],
       ['IMG_4181.webp', 'Crate of Colors', 'Crate of Colors'],
       ['IMG_4186.webp', 'Porch Posy', 'Porch Posy'],
-      ['IMG_4193.webp', 'Market Morning', 'Market Morning'],
       ['IMG_4195.webp', 'Our Market Table', 'Our Market Table'],
       ['IMG_4213.webp', 'Autumn Harvest', 'Autumn Harvest'],
       ['IMG_4252.webp', 'Banquet Blooms', 'Banquet Blooms'],
       ['IMG_4253.webp', 'Barn Reception', 'Barn Reception'],
-      ['IMG_4259(1).webp', 'Reception Blooms', 'Reception Blooms'],
       ['IMG_4259.webp', 'Table Trio', 'Table Trio'],
       ['IMG_4335.webp', 'Wedding Party', 'Wedding Party'],
       ['IMG_4344.webp', 'Confetti Bouquet', 'Confetti Bouquet'],
-      ['IMG_4580.webp', 'Handpicked', 'Handpicked'],
       ['IMG_4581.webp', 'Jewel Tones', 'Jewel Tones'],
-      ['IMG_4676.webp', 'Lace and Roses', 'Lace & Roses'],
       ['IMG_4679.webp', 'Crimson Bunch', 'Crimson Bunch'],
       ['IMG_6630.webp', 'Countryside Basket', 'Countryside Basket'],
       ['IMG_4682.webp', 'Anemone Bouquet', 'Anemone Bouquet'],
       ['IMG_4685.webp', 'Green and Gold', 'Green & Gold'],
       ['IMG_4687.webp', 'Show Bouquet', 'Show Bouquet'],
       ['IMG_4757.webp', 'Daisy Bucket', 'Daisy Bucket'],
-      ['IMG_4890.webp', 'Color Burst', 'Color Burst'],
-      ['IMG_4892.webp', 'Dahlia Basket', 'Dahlia Basket'],
       ['IMG_4941.webp', 'Plum and Blush', 'Plum & Blush'],
       ['IMG_5034.webp', 'Zinnia Party', 'Zinnia Party'],
       ['IMG_5229.webp', 'Farmers\' Market', 'Farmers\' Market'],
       ['IMG_5232.webp', 'Sunshine Bunch', 'Sunshine Bunch'],
       ['IMG_5235.webp', 'Gerbera Glow', 'Gerbera Glow'],
-      ['IMG_5360.webp', 'Hello Sunflower', 'Hello Sunflower'],
       ['IMG_5394.webp', 'Pop-up Blooms', 'Pop-up Blooms'],
       ['IMG_5404.webp', 'Sunflower Vase', 'Sunflower Vase'],
       ['IMG_6620.webp', 'Buttercream Roses', 'Buttercream Roses'],
@@ -2608,9 +2832,6 @@ fieldset.field{border:0;padding:0}
       ['IMG_7222.webp', 'Zinnia Posy', 'Zinnia Posy']
     ],
     face: [
-      ['Cosmos white.webp', 'White Cosmos face paint design', 'White Cosmos'],
-      ['cosmos.webp', 'Pink Cosmos face paint design', 'Pink Cosmos'],
-      ['IMG_3060.webp', 'Cosmos Canvas face paint design', 'Cosmos Canvas'],
       ['Batmans.webp', 'Two children dressed in Batman costumes', 'Superhero fans'],
       ['IMG_5088.webp', 'Boy with a brown and white puppy muzzle painted on his face', 'Puppy muzzle'],
       ['IMG_5097.webp', 'Two friends with red and white clown face paint at the market', 'Clown faces at the market'],
@@ -2619,23 +2840,22 @@ fieldset.field{border:0;padding:0}
       ['IMG_5381.webp', 'Young man with colorful tiger stripe face paint', 'Tiger stripes'],
       ['IMG_5491.webp', 'Three jack-o-lanterns painted on a forearm', 'Pumpkin arm art'],
       ['IMG_5757.webp', 'Face painter working on a design', 'Painting in progress'],
-      ['IMG_5771.webp', 'Face painter at the booth', 'At the booth'],
       ['IMG_5772.webp', 'Face painter creating a design', 'Design in progress'],
       ['IMG_9858.webp', 'Woman with a black and white cat face paint design', 'Cat face'],
       ['Joker.webp', 'Boy with a Joker face paint design', 'Joker look'],
       ['Little__Hulk.webp', 'Boy with green Hulk face paint', 'Little Hulk'],
-      ['Little_Hulk_2.webp', 'Girl roaring with green Hulk face paint', 'Hulk roar'],
       ['Pina_and_silver_butterfly.webp', 'Girl with a pink and silver butterfly face paint design', 'Silver butterfly'],
       ['Puppy.webp', 'Girl with a puppy dog face paint design', 'Puppy dog'],
       ['Rainbow_butterfly.webp', 'Girl with rainbow butterfly wings face paint', 'Rainbow wings'],
-      ['Spider-Man.webp', 'Boy in a striped suit with a Spider-Man mask face paint design', 'Spider-Man mask'],
       ['Spiderman_2.webp', 'Smiling boy with a Spider-Man face paint design', 'Spider-Man smile']
     ],
+    /* the four real pieces now sit on the artist cards above, so this gallery
+       shows the site's illustrated artwork until showcase photos are supplied */
     art: [
-      ['Hanging Out.webp', 'Hanging Out watercolor painting', 'Hanging Out'],
-      ['IMG_3621.webp', 'Happiness Blooms folk painting', 'Happiness Blooms'],
-      ['IMG_3759.webp', 'Spring Blossoms painting', 'Spring Blossoms'],
-      ['landscape.webp', 'Winter Marsh landscape photograph', 'Winter Marsh']
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon']
     ]
   };
 
@@ -2656,6 +2876,18 @@ fieldset.field{border:0;padding:0}
           imgEl.dataset.fb = '1';
           imgEl.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(window.ccArt(artKind, seed));
         });
+      }
+
+      /* the art gallery is illustrated artwork (the four real pieces now live
+         on the artist cards); every other gallery serves real photos.
+         The hanging/abstract framed variants are deterministic, so rotate
+         through them plus two seed-varied blooms to keep all four distinct. */
+      function srcOf(it, k) {
+        if (key === 'art') {
+          var kinds = ['hanging', 'bloom', 'frame', 'bloom'];
+          return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(window.ccArt(kinds[k % kinds.length], (k % 7) + 1));
+        }
+        return './img/' + it[0];
       }
 
       /* slideshow chrome */
@@ -2692,7 +2924,7 @@ fieldset.field{border:0;padding:0}
         ti.alt = '';
         ti.loading = 'lazy';
         ti.decoding = 'async';
-        ti.src = './img/' + it[0];
+        ti.src = srcOf(it, k);
         guard(ti, (k % 7) + 1);
         b.appendChild(ti);
         b.addEventListener('click', function () { setSlide(k); bump(); });
@@ -2703,7 +2935,7 @@ fieldset.field{border:0;padding:0}
         i = ((idx % n) + n) % n;
         var it = items[i];
         img.dataset.fb = '';
-        img.src = './img/' + it[0];
+        img.src = srcOf(it, i);
         img.alt = it[1];
         stage.dataset.cap = it[2];
         meta.querySelector('.ss-caption').textContent = it[2];
@@ -2711,11 +2943,20 @@ fieldset.field{border:0;padding:0}
         var tbs = thumbs.children;
         for (var k = 0; k < tbs.length; k++) tbs[k].classList.toggle('is-on', k === i);
         var act = tbs[i];
-        if (act && act.scrollIntoView) {
-          try { act.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduced ? 'auto' : 'smooth' }); } catch (e) {}
+        if (act) {
+          /* scroll ONLY the thumbnail strip container, never the window */
+          var target = act.offsetLeft - (thumbs.clientWidth - act.offsetWidth) / 2;
+          var max = thumbs.scrollWidth - thumbs.clientWidth;
+          var left = Math.max(0, Math.min(target, max));
+          if (thumbs.scrollTo) {
+            try { thumbs.scrollTo({ left: left, behavior: reduced ? 'auto' : 'smooth' }); }
+            catch (e) { thumbs.scrollLeft = left; }
+          } else {
+            thumbs.scrollLeft = left;
+          }
         }
         var nxt = new Image();   /* warm the next photo so swipes feel instant */
-        nxt.src = './img/' + items[(i + 1) % n][0];
+        nxt.src = srcOf(items[(i + 1) % n], (i + 1) % n);
       }
 
       /* controls */
@@ -2723,7 +2964,16 @@ fieldset.field{border:0;padding:0}
       $('.ss-next', ss).addEventListener('click', function () { setSlide(i + 1); bump(); });
       stage.addEventListener('click', function (e) {
         if (e.target.closest('.ss-btn')) return;
-        openLightbox(img, stage.dataset.cap || '');
+        /* open the full album so arrows/swipe/counter work from the slideshow */
+        var entries = [], start = 0;
+        $$('.g-item', grid).forEach(function (g) {
+          var m = $('.ph', g);
+          if (!m) return;
+          if (entries.length === i) start = entries.length;
+          entries.push({ node: m, caption: lbFigCap(g) });
+        });
+        if (entries.length) openLightbox(img, stage.dataset.cap || '', entries, start);
+        else openLightbox(img, stage.dataset.cap || '');
       });
       ss.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowLeft') { e.preventDefault(); setSlide(i - 1); bump(); }
@@ -2736,24 +2986,40 @@ fieldset.field{border:0;padding:0}
       stage.addEventListener('touchend', function (e) {
         var dx = e.changedTouches[0].clientX - tx;
         if (Math.abs(dx) > 44) setSlide(dx < 0 ? i + 1 : i - 1);
+        touched = false;
         resume();
       }, { passive: true });
 
-      /* gentle autoplay, always yielding to the visitor */
+      /* gentle autoplay: only runs while the gallery is actually on screen */
+      var inView = false, hovered = false, focused = false, touched = false;
       function pause() { if (timer) { clearInterval(timer); timer = null; } }
-      function resume() { if (reduced || timer) return; timer = setInterval(function () { setSlide(i + 1); }, 5200); }
-      function bump() { pause(); resume(); }
-      ss.addEventListener('mouseenter', pause);
-      ss.addEventListener('mouseleave', resume);
-      ss.addEventListener('focusin', pause);
-      ss.addEventListener('focusout', resume);
-      ss.addEventListener('touchstart', pause, { passive: true });
+      function resume() {
+        pause();
+        if (reduced || !inView || hovered || focused || touched) return;
+        timer = setInterval(function () { setSlide(i + 1); }, 5200);
+      }
+      function bump() { resume(); }
+      ss.addEventListener('mouseenter', function () { hovered = true; pause(); });
+      ss.addEventListener('mouseleave', function () { hovered = false; resume(); });
+      ss.addEventListener('focusin', function () { focused = true; pause(); });
+      ss.addEventListener('focusout', function () { focused = false; resume(); });
+      ss.addEventListener('touchstart', function () { touched = true; pause(); }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        var vo = new IntersectionObserver(function (entries) {
+          inView = entries[0].isIntersecting;
+          if (inView) resume(); else pause();
+        }, { threshold: 0.25 });
+        vo.observe(ss);
+      } else {
+        inView = true;
+      }
 
       /* responsive grid below the slideshow */
       var html = '';
       for (var g = 0; g < n; g++) {
         var it = items[g];
-        html += '<figure class="g-item"><div class="ph"><img src="./img/' + esc(it[0]) + '" alt="' + esc(it[1]) +
+        html += '<figure class="g-item"><div class="ph"><img src="' + srcOf(it, g) + '" alt="' + esc(it[1]) +
           '" data-art="' + artKind + '" data-seed="' + ((g % 7) + 1) + '" data-label="' + esc(it[2]) +
           '" loading="lazy" decoding="async" onerror="ccFallback(this)" /></div><figcaption>' + esc(it[2]) + '</figcaption></figure>';
       }
@@ -2779,6 +3045,11 @@ fieldset.field{border:0;padding:0}
 
   /* Init */
   function init() {
+    /* we decide where a reload lands (the URL hash), not the browser's
+       scroll restoration, which would otherwise restore the pre-reload
+       position (e.g. deep inside a gallery) */
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+
     /* illustrated art slots */
     $$('.art-slot').forEach(function (el) {
       if (!el.innerHTML.trim()) el.innerHTML = window.ccArt(el.dataset.art, parseInt(el.dataset.seed || '1', 10));
