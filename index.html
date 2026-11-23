@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Colorful Creations | Flowers, Face Painting &amp; Local Art | Plattsburgh, NY</title>
-<meta name="description" content="Colorful Creations is a Plattsburgh / Clinton County, NY creative studio offering homegrown seasonal flowers, professional event face painting, and a curated showcase of local artists." />
-<meta property="og:title" content="Colorful Creations | Flowers, Face Painting &amp; Local Art | Plattsburgh, NY" />
-<meta property="og:description" content="Homegrown seasonal flowers, professional event face painting and a curated showcase of local artists in Plattsburgh / Clinton County, NY." />
+<title>Colorful Creations | Flowers, Face Painting &amp; Local Art | Peru, NY</title>
+<meta name="description" content="Colorful Creations is a Peru, NY creative business serving Clinton County offering homegrown seasonal flowers, professional event face painting, and a curated showcase of local artists." />
+<meta name="robots" content="noindex, nofollow, noai, noimageai" />
+<meta property="og:title" content="Colorful Creations | Flowers, Face Painting &amp; Local Art | Peru, NY" />
+<meta property="og:description" content="Homegrown seasonal flowers, professional event face painting and a curated showcase of local artists in Peru, NY and Clinton County." />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A1B33'/%3E%3Cg fill='%23F6A81C'%3E%3Cellipse cx='32' cy='15' rx='7' ry='11'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='15' rx='7' ry='11' transform='rotate(288 32 32)'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='8' fill='%23F2543F'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" href="./img/logo-cosmos.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300..700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
 
 <!-- Safety net: any image that fails to load is swapped for an illustrated card, so a broken photo never appears. -->
 <script>
@@ -800,33 +801,91 @@ section[id],form[id],div[id]{scroll-margin-top:112px}
 .artist .btn{align-self:flex-start}
 
 /* ============ Lightbox ============ */
+/* ============ Fullscreen lightbox viewer ============ */
 .lightbox{
-  position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px;
-  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  position:fixed;left:0;top:0;right:0;bottom:0;
+  height:100vh;height:100dvh;
+  z-index:120;display:grid;place-items:center;padding:24px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,visibility 0s linear .3s;
 }
-.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease,visibility 0s}
 .lightbox-backdrop{
-  position:absolute;inset:0;background:rgba(42,27,51,.62);
+  position:absolute;inset:0;background:rgba(23,15,27,.92);
 }
 .lightbox-card{
-  position:relative;margin:0;background:var(--paper);border-radius:var(--r-md);
-  padding:16px 16px 20px;width:min(620px,92vw);box-shadow:var(--shadow-lg);
-  border:1.5px solid rgba(255,255,255,.9);
-  transform:translateY(16px) scale(.96);transition:transform .4s var(--spring);
-  max-height:88vh;overflow:auto;
+  position:relative;margin:0;background:transparent;border:0;padding:0;box-shadow:none;
+  width:100%;height:100%;max-height:none;overflow:visible;
+  display:grid;grid-template-rows:1fr auto;gap:10px;
+  transform:none;transition:none;
 }
-.lightbox.open .lightbox-card{transform:translateY(0) scale(1)}
-.lightbox-media{border-radius:var(--r-sm);overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--canvas)}
-.lightbox-media svg,.lightbox-media img{width:100%;height:100%;display:block;object-fit:cover}
+.lightbox-media{
+  position:relative;background:transparent;border-radius:0;aspect-ratio:auto;overflow:visible;
+  display:grid;place-items:center;min-height:0;min-width:0;
+}
+.lightbox-media img,.lightbox-media svg{
+  max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;
+  /* the media row can size to the image's intrinsic height, so cap the image
+     against the viewport too — keeps landscape/short windows fully on screen */
+  max-height:calc(100vh - 110px);
+  max-height:calc(100dvh - 110px);
+  transform-origin:center center;
+  filter:drop-shadow(0 22px 50px rgba(0,0,0,.55));
+}
 .lightbox-card figcaption{
-  padding:15px 6px 0;font-family:var(--serif);font-size:1.05rem;color:var(--ink);text-align:center;
+  padding:0 8px 4px;font-family:var(--serif);font-size:clamp(.95rem,2.2vw,1.15rem);
+  color:#FFFDF9;text-align:center;text-shadow:0 1px 10px rgba(0,0,0,.75);
+  min-height:1.4em;
 }
 .lightbox-close{
-  position:absolute;top:-14px;right:-14px;width:44px;height:44px;border-radius:var(--r-pill);
-  background:var(--ink);color:#FFFDF9;border:2px solid var(--paper);font-size:1.3rem;
-  line-height:1;cursor:pointer;box-shadow:var(--shadow);transition:transform .3s var(--spring);
+  position:absolute;
+  top:calc(14px + env(safe-area-inset-top,0px));
+  right:calc(14px + env(safe-area-inset-right,0px));
+  width:44px;height:44px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.14);color:#FFFFFF;border:1.5px solid rgba(255,255,255,.5);
+  font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:none;
+  display:grid;place-items:center;z-index:3;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:transform .3s var(--spring),background .2s ease;
 }
-.lightbox-close:hover{transform:rotate(90deg) scale(1.08)}
+.lightbox-close:hover{transform:rotate(90deg) scale(1.08);background:rgba(255,255,255,.26)}
+.lb-count{
+  position:absolute;
+  top:calc(24px + env(safe-area-inset-top,0px));
+  left:calc(18px + env(safe-area-inset-left,0px));
+  color:#FFFFFF;font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.08em;
+  background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);
+  padding:7px 13px;border-radius:var(--r-pill);z-index:3;min-height:20px;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.lb-count:empty{display:none}
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.14);color:#FFFFFF;border:1.5px solid rgba(255,255,255,.45);
+  cursor:pointer;display:grid;place-items:center;z-index:3;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:background .2s ease,transform .2s ease;
+}
+.lb-nav:hover{background:rgba(255,255,255,.28)}
+.lb-nav:active{transform:translateY(-50%) scale(.94)}
+.lb-nav[hidden]{display:none}
+.lb-prev{left:calc(14px + env(safe-area-inset-left,0px))}
+.lb-next{right:calc(14px + env(safe-area-inset-right,0px))}
+
+@media (max-width:640px){
+  .lightbox{padding:14px}
+  .lb-nav{width:44px;height:44px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-count{top:calc(14px + env(safe-area-inset-top,0px));left:calc(12px + env(safe-area-inset-left,0px))}
+}
+@media (max-height:560px){
+  .lightbox{padding:10px 62px}
+  .lightbox-card figcaption{font-size:.9rem}
+  .lb-count{top:calc(8px + env(safe-area-inset-top,0px))}
+  .lightbox-close{top:calc(8px + env(safe-area-inset-top,0px))}
+}
 
 /* ============ Forms ============ */
 .form-card{
@@ -1198,29 +1257,220 @@ fieldset.field{border:0;padding:0}
   .reveal,[data-stagger]>*{opacity:1 !important;transform:none !important}
 }
 </style>
+
+<!-- ============ Vibrant makeover layer: restyles only, no markup or JS depends on it ============ -->
+<style id="makeover">
+/* Brand palette taken from the client's business card: pink #ED4367, sunflower #FFCC33, royal purple #411B88 */
+:root{
+  --brand-pink:#ED4367; --brand-sun:#FFCC33; --brand-purple:#411B88;
+  --sage-surface:#D3F8E8; --sage:#00B37E; --sage-deep:#047857;
+  --blush-surface:#FFE3EA; --blush:#ED4367; --blush-deep:#B8173E;
+  --lav-surface:#ECE3FF; --lav:#6A3FC8; --lav-deep:#411B88;
+  --butter-surface:#FFF4CC; --butter:#FFCC33; --butter-deep:#7A5200;
+  --serif:'Oswald','Arial Narrow',sans-serif;
+  --shadow:0 22px 50px -20px rgba(45,10,70,.5);
+  --shadow-soft:0 10px 24px -14px rgba(45,10,70,.55);
+  --shadow-lg:0 40px 80px -30px rgba(45,10,70,.65);
+  --rainbow:linear-gradient(90deg,#FFCC33,#ED4367 50%,#411B88);
+  --mesh-base:#ED4367;
+  --mesh:
+    radial-gradient(55vw 60vh at 0% 0%,rgba(65,27,136,.85) 0%,transparent 65%),
+    radial-gradient(45vw 50vh at 100% 0%,#FF7A99 0%,transparent 60%),
+    radial-gradient(50vw 55vh at 100% 100%,rgba(255,204,51,.75) 0%,transparent 55%),
+    radial-gradient(45vw 50vh at 0% 100%,rgba(65,27,136,.6) 0%,transparent 60%);
+}
+body:has(#page-flowers.is-active){--mesh:
+  radial-gradient(55vw 60vh at 0% 0%,rgba(4,120,87,.7) 0%,transparent 62%),
+  radial-gradient(45vw 50vh at 100% 0%,#FF7A99 0%,transparent 60%),
+  radial-gradient(55vw 55vh at 100% 100%,rgba(255,204,51,.8) 0%,transparent 55%),
+  radial-gradient(45vw 50vh at 0% 100%,rgba(65,27,136,.55) 0%,transparent 60%)}
+body:has(#page-face.is-active){--mesh:
+  radial-gradient(60vw 60vh at 0% 0%,rgba(65,27,136,.9) 0%,transparent 62%),
+  radial-gradient(50vw 55vh at 100% 0%,#FF3F8E 0%,transparent 60%),
+  radial-gradient(50vw 55vh at 100% 100%,rgba(255,204,51,.6) 0%,transparent 55%),
+  radial-gradient(45vw 50vh at 0% 100%,#C2185B 0%,transparent 60%)}
+body:has(#page-art.is-active){--mesh:
+  radial-gradient(65vw 70vh at 0% 0%,rgba(65,27,136,.95) 0%,transparent 65%),
+  radial-gradient(45vw 50vh at 100% 0%,rgba(65,27,136,.6) 0%,transparent 60%),
+  radial-gradient(50vw 55vh at 100% 100%,rgba(255,204,51,.7) 0%,transparent 55%),
+  radial-gradient(45vw 50vh at 0% 100%,#FF7A99 0%,transparent 60%)}
+body:has(#page-about.is-active){--mesh:
+  radial-gradient(55vw 60vh at 0% 0%,rgba(65,27,136,.8) 0%,transparent 62%),
+  radial-gradient(45vw 50vh at 100% 0%,rgba(255,204,51,.55) 0%,transparent 60%),
+  radial-gradient(50vw 55vh at 100% 100%,rgba(65,27,136,.6) 0%,transparent 55%),
+  radial-gradient(45vw 50vh at 0% 100%,#FF7A99 0%,transparent 60%)}
+
+/* ---- Vibrant pink canvas ---- */
+body{background:var(--mesh-base);background-image:none}
+body::before{
+  content:'';position:fixed;inset:-12%;z-index:-1;pointer-events:none;
+  background:var(--mesh),var(--mesh-base);
+  animation:meshDrift 26s ease-in-out infinite alternate;
+}
+body::after{ /* fine canvas grain, like the painted logo */
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@keyframes meshDrift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(3%,-2%,0) scale(1.06)}100%{transform:translate3d(-3%,2%,0) scale(1.03)}}
+#page-flowers,#page-face,#page-art,#page-about,#page-home{background:transparent}
+
+/* ---- Text directly on the pink canvas is white ---- */
+.hero-copy,.page-hero .hero-grid>div:first-child,.sec-head,.hero-trust{
+  --ink:#FFFFFF;--cocoa:#FFFFFF;--muted:rgba(255,255,255,.85);
+  text-shadow:0 2px 14px rgba(45,10,70,.35);
+}
+.sec-head .lead,.hero-copy .lead,.page-hero .lead{font-weight:500}
+.stat,.tag,.sticker,.seal,.btn,.art-note{--ink:#2A1B33;--cocoa:#54465C;--muted:#6E6177;text-shadow:none}
+/* Headings in the business-card typeface: tall, condensed */
+h1,h2,h3,h4{font-weight:500;letter-spacing:.005em;line-height:1.12}
+h1{font-size:clamp(2.5rem,5.6vw,4.4rem);font-weight:600;line-height:1.05}
+h2{font-size:clamp(1.9rem,3.6vw,2.8rem)}
+/* the card's white lettering with an offset purple shadow */
+.hero-copy h1,.page-hero h1{text-shadow:3px 3px 0 var(--brand-purple)}
+.sec-head h2{text-shadow:2px 2px 0 var(--brand-purple)}
+.hero h1 em{color:var(--brand-sun);white-space:normal}
+.hero h1 em::after{display:none}
+.sec-head::after,.gal-section::before{filter:invert(1);opacity:.7}
+.sec-head .eyebrow,.hero-copy .eyebrow,.page-hero .eyebrow{
+  color:#fff;background:rgba(65,27,136,.35);border:1.5px solid rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-shadow:none;
+}
+.hero-trust li::before{background:var(--brand-sun);border-color:#fff}
+
+/* ---- Header: royal purple glass with the cosmos logo ---- */
+.hdr{
+  --ink:#FFFFFF;--cocoa:rgba(255,255,255,.85);--muted:rgba(255,255,255,.7);
+  color:#fff;background:rgba(50,18,110,.82);border-bottom:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);
+}
+.hdr::before{height:4px;background:var(--rainbow)}
+.brand-mark{border-radius:50%;box-shadow:0 0 0 2px #fff,var(--shadow-soft)}
+.brand-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.brand-text strong,.ftr .brand-text strong{font-family:var(--serif);font-weight:500;font-size:1.4rem;letter-spacing:.01em;text-shadow:2px 2px 0 var(--brand-pink)}
+.nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
+.nav-indicator{background:var(--brand-sun);box-shadow:0 8px 22px -8px rgba(255,204,51,.9)}
+.nav-link:hover{color:#fff}
+.nav-link.is-active{color:var(--brand-purple)}
+.burger{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);box-shadow:none}
+@media (max-width:940px){
+  .nav{background:rgba(50,18,110,.97);border:1px solid rgba(255,255,255,.18)}
+  .nav-link.is-active{background:var(--brand-sun);color:var(--brand-purple)}
+}
+
+/* ---- Buttons in the card colors ---- */
+.btn{box-shadow:0 14px 30px -14px rgba(45,10,70,.8)}
+.btn-emerald{background:var(--brand-purple);box-shadow:0 16px 32px -14px rgba(65,27,136,.95)}
+.btn-emerald:hover{background:#2F1266}
+.btn-coral{background:linear-gradient(135deg,#D62B55,#B8173E);box-shadow:0 16px 32px -14px rgba(184,23,62,.95)}
+.btn-coral:hover{background:#9E1236}
+.hdr .btn-coral,.hero-copy .btn-coral,.page-hero .btn-coral{background:var(--brand-sun);color:var(--brand-purple)}
+.hdr .btn-coral:hover,.hero-copy .btn-coral:hover,.page-hero .btn-coral:hover{background:#FFD95C}
+.btn-marigold{background:var(--brand-sun);color:var(--brand-purple)}
+.btn-marigold:hover{background:#FFD95C}
+.hero-copy .btn-outline,.page-hero .btn-outline{
+  background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.65);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.hero-copy .btn-outline:hover,.page-hero .btn-outline:hover{background:#fff;color:var(--brand-purple);border-color:#fff}
+
+/* ---- Cards ---- */
+.pillar,.price-card,.form-card,.story-card,.artist,.g-item,.slideshow,.roots,.stat,.gallery-note,.live,.season{border:1px solid rgba(255,255,255,.7)}
+.pillar::before{height:6px;background:linear-gradient(90deg,var(--accent),var(--brand-sun))}
+.pillar:hover,.price-card:hover,.artist:hover,.g-item:hover{box-shadow:0 46px 90px -30px rgba(45,10,70,.8)}
+.form-card::before,.roots::before{background:var(--rainbow)}
+.price-card.is-featured{background:linear-gradient(180deg,var(--lav-surface),#fff 55%);border:2px solid var(--brand-purple)}
+.price-card.is-featured::before{background:var(--brand-purple)}
+.live{background:rgba(255,255,255,.96)}
+.live::before{background:linear-gradient(180deg,var(--brand-sun),var(--brand-pink),var(--brand-purple))}
+.combo{background:linear-gradient(120deg,#FFE3EA,#FFF8EE 50%,#FFF4CC);border:2px solid rgba(255,255,255,.9);box-shadow:var(--shadow-lg)}
+.combo::after{background:radial-gradient(circle,rgba(237,67,103,.35),transparent 70%)}
+.float-acc{opacity:.9}
+.acc-1{background:radial-gradient(circle at 30% 30%,#FFE58A,var(--brand-sun))}
+.acc-2{background:radial-gradient(circle at 30% 30%,#8E6BE0,var(--brand-purple))}
+.acc-3{background:radial-gradient(circle at 30% 30%,#fff,#FFD1DC)}
+.art-badge{background:var(--brand-purple)}
+.seal{background:var(--brand-sun);border:2px dashed var(--brand-purple);color:var(--brand-purple)}
+.sticker{border-width:0;box-shadow:0 10px 22px -10px rgba(45,10,70,.6)}
+.ss-btn{background:rgba(65,27,136,.85)}
+.ss-btn:hover{background:var(--brand-purple)}
+
+/* ---- Flower season calendar ---- */
+.season{
+  display:grid;grid-template-columns:1fr auto;gap:14px 30px;align-items:center;margin-top:28px;
+  background:#fff;border-radius:var(--r-lg);padding:clamp(20px,2.6vw,30px);box-shadow:var(--shadow);
+}
+.season h3{margin:.15em 0 .2em}
+.season p{margin:0;color:var(--cocoa);font-size:.94rem;max-width:48ch}
+.season-label{font-family:var(--rounded);font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--sage-deep)}
+.season-bar{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(12,1fr);gap:5px;min-width:min(480px,100%)}
+.season-bar li{
+  text-align:center;font-family:var(--rounded);font-size:.72rem;font-weight:700;color:var(--muted);
+  background:var(--blush-surface);border-radius:10px;padding:16px 0 8px;position:relative;
+}
+.season-bar li.is-home{background:var(--sage);color:#fff}
+.season-key{grid-column:1/-1;list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:wrap;font-family:var(--rounded);font-size:.8rem;font-weight:700;color:var(--cocoa)}
+.season-key li::before{content:'';display:inline-block;width:12px;height:12px;border-radius:4px;background:var(--blush-surface);border:1px solid rgba(0,0,0,.08);margin-right:7px;vertical-align:-1px}
+.season-key li.is-home::before{background:var(--sage)}
+
+/* ---- Club footers, payments, print sizes, socials ---- */
+.club-foot{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;
+}
+.club-foot>div{background:rgba(255,255,255,.95);border-radius:var(--r-md);padding:16px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;font-size:.92rem;color:var(--cocoa)}
+.club-foot b{font-family:var(--rounded);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-purple)}
+.pay,.social{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pay li{font-family:var(--rounded);font-size:.8rem;font-weight:800;padding:6px 13px;border-radius:var(--r-pill);background:var(--lav-surface);color:var(--brand-purple);border:1.5px solid rgba(65,27,136,.25)}
+.ftr .pay li{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25)}
+.social{margin-top:18px;position:relative;z-index:1}
+.social a{display:inline-block;font-family:var(--rounded);font-weight:800;font-size:.85rem;color:var(--brand-purple);background:#fff;padding:9px 16px;border-radius:var(--r-pill);text-decoration:none}
+.social a:hover{background:var(--brand-sun)}
+.sizes{list-style:none;margin:8px 0 14px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sizes li{background:var(--butter-surface);border-radius:16px;padding:12px 6px;text-align:center;display:flex;flex-direction:column}
+.sizes b{font-family:var(--serif);font-weight:500;font-size:1.2rem;color:var(--ink)}
+.sizes span{font-family:var(--rounded);font-weight:800;font-size:.85rem;color:var(--butter-deep)}
+#painters .artist .btn-row{margin-top:auto}
+
+/* ---- Artwork protection: watermark over art images and the full-size viewer ---- */
+#page-art .ph::after,#page-art .ss-stage::after,.lightbox-media::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170'%3E%3Ctext x='150' y='92' text-anchor='middle' transform='rotate(-22 150 85)' font-family='Arial' font-size='17' font-weight='700' fill='white' fill-opacity='.5' stroke='black' stroke-opacity='.18' stroke-width='.6'%3E© Colorful Creations%3C/text%3E%3C/svg%3E");
+}
+#page-art img,.lightbox img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+
+/* ---- Contact card + footer ---- */
+.contact-card{background:linear-gradient(150deg,var(--brand-purple) 0%,#8E1F6B 60%,var(--brand-pink) 120%);border:1px solid rgba(255,255,255,.25)}
+.contact-card::after{background:radial-gradient(circle,rgba(255,204,51,.45),transparent 70%)}
+.c-list a:hover{color:var(--brand-sun)}
+.ftr{
+  --ink:#fff;--cocoa:rgba(255,255,255,.82);--muted:rgba(255,255,255,.62);
+  background:linear-gradient(180deg,#2B0F5E,#1A0838);border-top:0;color:var(--cocoa);
+}
+.ftr::before{background:var(--rainbow)}
+.ftr ul a::before,.ftr ul button::before{background:var(--brand-sun)}
+.ftr-bottom{border-top-color:rgba(255,255,255,.14);align-items:center}
+.demo-banner{background:linear-gradient(100deg,#2B0F5E,var(--brand-purple) 55%,#8E1F6B)}
+
+@media (max-width:940px){
+  .season{grid-template-columns:1fr}
+  .season-bar{min-width:0}
+  .club-foot{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .season-bar{grid-template-columns:repeat(6,1fr)}
+  .sizes{grid-template-columns:repeat(2,1fr)}
+}
+</style>
 </head>
 <body>
 <div class="demo-banner" id="demoBanner" role="status">
   <span class="db-pill">Design preview</span>
-  <p>All text, prices, names, hours, and contact details on this site are samples, ready to be swapped for Colorful Creations' real information.</p>
+  <p>The phone number and email are Colorful Creations' real contact details. Prices, names, locations and other copy are samples, ready to be swapped for real information.</p>
   <button class="db-close" id="dbClose" type="button" aria-label="Dismiss this notice"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8"/></svg></button>
 </div>
 <header class="hdr" id="hdr">
   <div class="hdr-inner">
     <a class="brand" href="#home" data-nav="home">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 42 42">
-          <rect width="42" height="42" rx="13" fill="#3E9E5B"/>
-          <g fill="#F6A81C">
-            <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6"/>
-            <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(72 21 21)"/>
-            <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(144 21 21)"/>
-            <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(216 21 21)"/>
-            <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(288 21 21)"/>
-          </g>
-          <circle cx="21" cy="21" r="5" fill="#F2543F"/>
-          <circle cx="21" cy="21" r="2" fill="#FFFDF9"/>
-        </svg>
+      <span class="brand-mark" aria-hidden="true"><img src="./img/logo-cosmos.png" alt="" width="44" height="44" />
       </span>
       <span class="brand-text">
         <strong>Colorful Creations</strong>
@@ -1256,23 +1506,23 @@ fieldset.field{border:0;padding:0}
       <span class="live-dot" aria-hidden="true"></span>
       <span class="live-title">Where to find us this week</span>
       <ul class="live-items">
-        <li><b>Weekly stems</b> at North Country Coop in Plattsburgh, Tue to Sat</li>
-        <li><b>Winter Craft Market</b>, Saturdays downtown Plattsburgh <span class="tag tag-mini">[Confirm dates]</span></li>
+        <li><b>Fresh bouquets</b> at the local food coop <span class="tag tag-mini">[Confirm days]</span></li>
+        <li><b>Farmers' markets</b>, May to October <span class="tag tag-mini">[Confirm locations]</span></li>
         <li><b>Now booking</b> Spring and Summer events, plus Valentine's pre-orders</li>
       </ul>
     </div>
 
     <section class="hero">
       <div class="hero-copy reveal">
-        <span class="eyebrow">Plattsburgh &amp; Clinton County, NY</span>
+        <span class="eyebrow">Peru, NY &amp; Clinton County</span>
         <div class="stickers" aria-hidden="true">
           <span class="sticker sticker-sage">Homegrown stems</span>
           <span class="sticker sticker-blush">Face painting</span>
           <span class="sticker sticker-lav">Local art</span>
         </div>
-        <h1>Homegrown flowers, joyful face painting, and local art, <em>made right here in Plattsburgh.</em></h1>
+        <h1>Homegrown flowers, joyful face painting, and local art, <em>made right here in the North Country.</em></h1>
         <p class="lead">
-          Colorful Creations is a North Country studio that brings together seasonal stems cut from our own
+          Colorful Creations is a North Country business that brings together seasonal stems cut from our own
           plot, professional face painting for parties and community events, and a curated showcase of
           Clinton County artists. Everything you need for a colorful celebration, booked in one place.
         </p>
@@ -1291,17 +1541,17 @@ fieldset.field{border:0;padding:0}
         <span class="float-acc acc-1" aria-hidden="true"></span>
         <span class="float-acc acc-2" aria-hidden="true"></span>
         <span class="float-acc acc-3" aria-hidden="true"></span>
-        <span class="art-badge">Made in Plattsburgh</span>
+        <span class="art-badge">Grown &amp; painted locally</span>
         <div class="art-card art-card-1">
           <div class="ph"><img src="./img/IMG_4042.webp" alt="Fresh homegrown bouquet in a glass jar" data-art="bouquet" data-seed="11" data-label="Homegrown blooms" onerror="ccFallback(this)" /></div>
           <span class="art-chip">Homegrown blooms</span>
         </div>
         <div class="art-card art-card-2">
-          <div class="ph"><img src="./img/IMG_3060.webp" alt="Cosmos flower design for face painting" data-art="face" data-seed="6" data-label="Party face painting" onerror="ccFallback(this)" /></div>
+          <div class="ph"><img src="./img/Rainbow_butterfly.webp" alt="Girl with rainbow butterfly face paint" data-art="face" data-seed="6" data-label="Party face painting" onerror="ccFallback(this)" /></div>
           <span class="art-chip">Party face painting</span>
         </div>
         <div class="art-card art-card-3">
-          <div class="ph"><img src="./img/IMG_3759.webp" alt="Pink blossom painting from the local artist showcase" data-art="bloom" data-seed="8" data-label="Local art" onerror="ccFallback(this)" /></div>
+          <div class="ph"><img src="./img/IMG_3759-web.jpg" alt="Pink blossom painting from the local artist showcase" data-art="bloom" data-seed="8" data-label="Local art" onerror="ccFallback(this)" /></div>
           <span class="art-chip">Local art</span>
         </div>
         <div class="art-note">
@@ -1309,22 +1559,22 @@ fieldset.field{border:0;padding:0}
           <p>Flowers, faces, and art, all together for an unforgettable party.</p>
           <button class="btn btn-emerald btn-sm" data-nav="about" data-focus="inquiryForm">Book / Inquire</button>
         </div>
-        <span class="seal" aria-hidden="true">Plattsburgh<br />grown &amp; painted<br />locally</span>
+        <span class="seal" aria-hidden="true">Homegrown<br />&amp; hand-<br />painted</span>
       </div>
     </section>
 
     <section class="section" id="pillars">
       <div class="sec-head center reveal">
         <span class="eyebrow">Three ways to color your day</span>
-        <h2>Three creative services, all from your neighborhood studio.</h2>
+        <h2>Three creative services, all from one local business.</h2>
         <p class="lead" style="margin-inline:auto">Pick one, or stack all three for a celebration nobody forgets.</p>
       </div>
 
       <div class="grid-3">
         <article class="pillar pillar-emerald reveal">
-          <div class="ph pillar-photo"><img src="./img/IMG_4676.webp" alt="Homegrown bouquet in a mason jar" data-art="bouquet" data-seed="12" data-label="Homegrown flowers" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="ph pillar-photo"><img src="./img/IMG_4679.webp" alt="Homegrown bouquet in a mason jar" data-art="bouquet" data-seed="12" data-label="Homegrown flowers" loading="lazy" onerror="ccFallback(this)" /></div>
           <h3>Homegrown Seasonal Flowers</h3>
-          <p>Cut fresh from our Plattsburgh plot and local growing partners, never shipped in from a wire service.</p>
+          <p>Homegrown in season, plus wholesale market flowers the rest of the year, never shipped in from a wire service.</p>
           <ul class="checks tight">
             <li>Weekly bouquets at the Coop &amp; farmers' market</li>
             <li>Office &amp; salon subscriptions on your rhythm</li>
@@ -1336,7 +1586,7 @@ fieldset.field{border:0;padding:0}
         </article>
 
         <article class="pillar pillar-coral reveal">
-          <div class="ph pillar-photo"><img src="./img/Cosmos white.webp" alt="Cosmos flower face-painting design" data-art="face" data-seed="7" data-label="Face painting" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="ph pillar-photo"><img src="./img/IMG_5097.webp" alt="Two friends with red and white clown face paint" data-art="face" data-seed="7" data-label="Face painting" loading="lazy" onerror="ccFallback(this)" /></div>
           <h3>Event &amp; Party Face Painting</h3>
           <p>Professional, skin-safe designs for birthdays, schools, libraries, fundraisers, shop openings &amp; campus events.</p>
           <ul class="checks tight">
@@ -1350,7 +1600,7 @@ fieldset.field{border:0;padding:0}
         </article>
 
         <article class="pillar pillar-marigold reveal">
-          <div class="ph pillar-photo"><img src="./img/IMG_3621.webp" alt="Sunflower painting from the local showcase" data-art="bloom" data-seed="9" data-label="Local art" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="ph pillar-photo"><img src="./img/IMG_3621-web.jpg" alt="Sunflower painting from the local showcase" data-art="bloom" data-seed="9" data-label="Local art" loading="lazy" onerror="ccFallback(this)" /></div>
           <h3>Local Artist Showcase</h3>
           <p>A curated digital gallery connecting Clinton County homeowners, gift buyers and visitors with local makers.</p>
           <ul class="checks tight">
@@ -1396,12 +1646,10 @@ fieldset.field{border:0;padding:0}
       <div class="roots reveal">
         <span class="roots-label">Proudly rooted in the North Country</span>
         <ul class="chips">
+          <li>Peru, NY</li>
           <li>Clinton County, NY</li>
-          <li>Plattsburgh</li>
-          <li>North Country Coop</li>
-          <li>Strand Center for the Arts</li>
-          <li>SUNY Plattsburgh</li>
-          <li>Saturday Farmers' Market</li>
+          <li>Local food coop</li>
+          <li>Farmers' markets</li>
         </ul>
       </div>
     </section>
@@ -1416,9 +1664,9 @@ fieldset.field{border:0;padding:0}
       <div class="hero-grid">
         <div class="reveal">
           <span class="eyebrow">Homegrown Seasonal Flowers</span>
-          <h1>Seasonal stems, cut and arranged right here in Plattsburgh.</h1>
+          <h1>Seasonal stems, cut and arranged right here in the North Country.</h1>
           <p class="lead">
-            We grow and gather seasonal stems right here in Plattsburgh, then design them the day they leave our
+            We grow and gather seasonal stems right here in Peru, NY, then design them the day they leave our
             hands. No three-day refrigerated trucks, no wire-service markup, no imported-roses-only catalog,
             just flowers that look like the North Country in the week you're buying them.
           </p>
@@ -1429,7 +1677,7 @@ fieldset.field{border:0;padding:0}
           <div class="hero-stats">
             <div class="stat"><b>Same-day</b><span>cut &amp; arranged</span></div>
             <div class="stat"><b>Seasonal</b><span>always on-trend</span></div>
-            <div class="stat"><b>~35 min</b><span>local travel radius</span></div>
+            <div class="stat"><b>May to Oct</b><span>homegrown season</span></div>
           </div>
         </div>
         <div class="hero-panel reveal">
@@ -1443,11 +1691,21 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+    <section class="season reveal" aria-label="Flower season">
+      <div>
+        <span class="season-label">Flower season</span>
+        <h3>Homegrown May through October.</h3>
+        <p>From November to April we still do weddings and events, using hand-picked wholesale market flowers.</p>
+      </div>
+      <ol class="season-bar"><li class="">Jan</li><li class="">Feb</li><li class="">Mar</li><li class="">Apr</li><li class="is-home">May</li><li class="is-home">Jun</li><li class="is-home">Jul</li><li class="is-home">Aug</li><li class="is-home">Sep</li><li class="is-home">Oct</li><li class="">Nov</li><li class="">Dec</li></ol>
+      <ul class="season-key"><li class="is-home">Homegrown stems</li><li>Wholesale market flowers</li></ul>
+    </section>
+
     <section class="section" id="flowerWays">
       <div class="sec-head reveal">
         <span class="eyebrow">Four clear ways to buy</span>
         <h2>Pick the one that fits your week.</h2>
-        <p class="lead">Every option below is homegrown, seasonal and Plattsburgh-local. Placeholder prices are marked so we can tune them together.</p>
+        <p class="lead">Every option below is seasonal and local. Placeholder prices are marked so we can tune them together.</p>
       </div>
 
       <div class="grid-2">
@@ -1470,7 +1728,7 @@ fieldset.field{border:0;padding:0}
           <h3>Weekly Business Subscriptions</h3>
           <div class="price"><span class="from">from</span> $45 <span class="unit">/ week</span></div>
           <span class="tag tag-amber">[Sample Pricing: Confirm at Meeting]</span>
-          <p>Fresh arrangements delivered on a regular rhythm for Plattsburgh offices, salons, cafés and B&amp;Bs.</p>
+          <p>Fresh arrangements delivered on a regular rhythm for local offices, salons, cafés and B&amp;Bs.</p>
           <ul class="checks tight">
             <li>Weekly, biweekly or monthly rhythm</li>
             <li>Pickup or local delivery included by area</li>
@@ -1509,6 +1767,63 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+    <section class="section" id="flowerClub">
+      <div class="sec-head reveal">
+        <span class="eyebrow">The Flower Club</span>
+        <h2>Fresh bouquets all summer, picked up near you.</h2>
+        <p class="lead">Subscribe once and collect a homegrown arrangement from June through October, every two weeks or once a month.</p>
+      </div>
+      <div class="grid-2">
+        <article class="price-card is-featured reveal">
+          <span class="price-kicker">Every two weeks</span>
+          <h3>Bloom Often</h3>
+          <div class="price">$240 <span class="unit">/ season, 10 bouquets</span></div>
+          <span class="tag tag-amber">[Sample Pricing: Confirm at Meeting]</span>
+          <ul class="checks tight">
+            <li>A new seasonal bouquet every other week, June to October</li>
+            <li>Skip a pickup when you're away</li>
+            <li>First pick of the season's specialty stems</li>
+          </ul>
+          <button class="btn btn-emerald preselect" data-select="Flower Club membership">Join the Flower Club</button>
+        </article>
+        <article class="price-card reveal">
+          <span class="price-kicker">Monthly</span>
+          <h3>Bloom Monthly</h3>
+          <div class="price">$130 <span class="unit">/ season, 5 bouquets</span></div>
+          <span class="tag tag-amber">[Sample Pricing: Confirm at Meeting]</span>
+          <ul class="checks tight">
+            <li>One generous bouquet a month, June to October</li>
+            <li>A great gift for a friend or neighbor</li>
+            <li>Upgrade to every two weeks at any time</li>
+          </ul>
+          <button class="btn btn-soft preselect" data-select="Flower Club membership">Join monthly</button>
+        </article>
+      </div>
+      <div class="club-foot reveal">
+        <div><b>Pickup spots</b><span>North Country Coop · Saturday Farmers' Market <span class="tag tag-mini">[Confirm locations]</span></span></div>
+        <div><b>Pay your way</b><ul class="pay" aria-label="Accepted payments"><li>Venmo</li><li>PayPal</li><li>Credit / debit card</li></ul></div>
+      </div>
+    </section>
+
+    <section class="combo reveal" id="weddingsEvents">
+      <div class="combo-art">
+        <div class="ph" style="border-radius:18px"><img src="./img/IMG_4253.webp" alt="Wedding-style bouquet of seasonal flowers" data-art="bouquet" data-seed="31" data-label="Weddings &amp; events" loading="lazy" onerror="ccFallback(this)" /></div>
+      </div>
+      <div class="combo-copy">
+        <span class="tag tag-coral">Weddings &amp; event planning</span>
+        <h2>Flowers for your wedding or event, planned together.</h2>
+        <p class="lead">From bridal bouquets to centerpieces for a whole reception, we plan the flowers with you. Homegrown in season, with wholesale market flowers the rest of the year.</p>
+        <ul class="checks tight">
+          <li>A free planning chat about your colors, budget and venue</li>
+          <li>Bouquets, boutonnières, crowns, centerpieces and arches</li>
+          <li>Pairs with face painting for showers and receptions</li>
+        </ul>
+        <div class="btn-row">
+          <button class="btn btn-coral preselect" data-select="Wedding / Event Arrangements">Plan my wedding or event</button>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="flowerFormSection">
       <div class="sec-head reveal">
         <span class="eyebrow">Quick flower order / subscription inquiry</span>
@@ -1535,6 +1850,8 @@ fieldset.field{border:0;padding:0}
               <option>Weekly Business Subscription</option>
               <option>Seasonal Pre-Order</option>
               <option>Wedding Bouquet-Only</option>
+              <option>Wedding / Event Arrangements</option>
+              <option>Flower Club membership</option>
               <option>Something else / not sure yet</option>
             </select>
           </label>
@@ -1565,7 +1882,7 @@ fieldset.field{border:0;padding:0}
 
         <div class="form-foot">
           <button class="btn btn-emerald btn-lg" type="submit">Send Flower Request</button>
-          <span class="hint">Prefer to talk? Call <b>(518) 555-0142</b>, we answer between arrangements.</span>
+          <span class="hint">Prefer to talk? Call <b>(518) 572-6529</b>, we answer between arrangements.</span>
         </div>
       </form>
     </section>
@@ -1573,7 +1890,7 @@ fieldset.field{border:0;padding:0}
     <section class="section gal-section" id="flowerGallery" data-gal="flowers" aria-label="Flower photo gallery">
       <div class="sec-head reveal">
         <span class="eyebrow">Cut, arranged, delivered</span>
-        <h2>Bouquets we've made for Plattsburgh.</h2>
+        <h2>Bouquets we've made for the North Country.</h2>
         <p class="lead">Market bunches, weekly subscriptions, wedding work and seasonal pre-orders, straight from our own plot and growing partners.</p>
       </div>
       <div class="slideshow reveal" data-ss="flowers" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Flower photo slideshow"></div>
@@ -1593,8 +1910,7 @@ fieldset.field{border:0;padding:0}
           <span class="eyebrow is-coral">Event &amp; Party Face Painting</span>
           <h1>Colorful, professional face painting for events across Clinton County.</h1>
           <p class="lead">
-            Birthdays in Morrisonville, school nights in Peru, library programs, fundraisers, shop openings and
-            SUNY Plattsburgh campus events. We bring the design board, the skin-safe paints and the queue
+            Birthdays, school events, library programs, fundraisers and community festivals. We bring the design board, the skin-safe paints and the queue
             management; you bring the guests.
           </p>
           <div class="btn-row" style="margin-top:24px">
@@ -1608,7 +1924,7 @@ fieldset.field{border:0;padding:0}
           </div>
         </div>
         <div class="hero-panel reveal">
-          <div class="art-slot" data-art="face" data-seed="3"><img src="./img/cosmos.webp" alt="Cosmos flower face-painting design" data-art="face" data-seed="3" data-label="Cosmos design" onerror="ccFallback(this)" /></div>
+          <div class="art-slot" data-art="face" data-seed="3"><img src="./img/cosmos-web.jpg" alt="Cosmos flower face-painting design" data-art="face" data-seed="3" data-label="Cosmos design" onerror="ccFallback(this)" /></div>
         </div>
       </div>
     </section>
@@ -1669,6 +1985,56 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+    <section class="section" id="painters">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Find a face painter</span>
+        <h2>Pick the painter that fits your party.</h2>
+        <p class="lead">Colorful Creations is a home for independent face painters across Clinton County. Browse their styles and contact the one you like directly.</p>
+      </div>
+      <div class="grid-3">
+        <article class="artist reveal">
+          <div class="ph"><img src="./img/Rainbow_butterfly.webp" alt="Rainbow butterfly face paint" data-art="face" data-seed="3" data-label="Andrea Hoffman" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="artist-body">
+            <span class="artist-medium">Butterflies, florals &amp; glitter</span>
+            <h3>Andrea Hoffman</h3>
+            <p>Book directly: prices and dates are agreed between you and the painter.</p>
+            <div class="btn-row">
+              <a class="btn btn-coral btn-sm" href="mailto:contact@colorfulcreations.us">Email</a>
+              <a class="btn btn-outline btn-sm" href="#" aria-label="Andrea Hoffman on Instagram (link to be added)">Instagram</a>
+            </div>
+          </div>
+        </article>
+        <article class="artist reveal">
+          <div class="ph"><img src="./img/Spiderman_2.webp" alt="Superhero face paint" data-art="face" data-seed="3" data-label="Jess Moreno" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="artist-body">
+            <span class="artist-medium">Superheroes &amp; bold designs</span>
+            <h3>Jess Moreno <span class="tag tag-mini">[Sample painter]</span></h3>
+            <p>Book directly: prices and dates are agreed between you and the painter.</p>
+            <div class="btn-row">
+              <a class="btn btn-coral btn-sm" href="mailto:painter2@example.com">Email</a>
+              <a class="btn btn-outline btn-sm" href="#" aria-label="Jess Moreno on Instagram (link to be added)">Instagram</a>
+            </div>
+          </div>
+        </article>
+        <article class="artist reveal">
+          <div class="ph"><img src="./img/Puppy.webp" alt="Puppy face paint" data-art="face" data-seed="3" data-label="Sam Lafountain" loading="lazy" onerror="ccFallback(this)" /></div>
+          <div class="artist-body">
+            <span class="artist-medium">Animals &amp; festival speed</span>
+            <h3>Sam Lafountain <span class="tag tag-mini">[Sample painter]</span></h3>
+            <p>Book directly: prices and dates are agreed between you and the painter.</p>
+            <div class="btn-row">
+              <a class="btn btn-coral btn-sm" href="mailto:painter3@example.com">Email</a>
+              <a class="btn btn-outline btn-sm" href="#" aria-label="Sam Lafountain on Instagram (link to be added)">Instagram</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="gallery-note reveal">
+        <span>Each painter is independent and sets their own prices. Are you a face painter who wants to be listed?
+        <button class="link-arrow" data-nav="about" data-focus="inquiryForm" data-intent="join-painters">Ask to join the hub</button></span>
+      </div>
+    </section>
+
     <section class="section" id="quoteSection">
       <div class="sec-head reveal">
         <span class="eyebrow is-coral">Smart event date &amp; quote checker</span>
@@ -1687,7 +2053,7 @@ fieldset.field{border:0;padding:0}
 
         <div class="form-grid">
           <label class="field"><span>Event date *</span><input name="eventDate" id="eventDate" type="date" required /></label>
-          <label class="field"><span>Town / location *</span><input name="town" type="text" required placeholder="Plattsburgh, NY" /></label>
+          <label class="field"><span>Town / location *</span><input name="town" type="text" required placeholder="Peru, NY" /></label>
           <label class="field"><span>Event type *</span>
             <select name="eventType" id="eventType" required>
               <option value="">Choose an event type…</option>
@@ -1759,7 +2125,7 @@ fieldset.field{border:0;padding:0}
           </div>
         </div>
         <div class="hero-panel reveal">
-          <div class="art-slot" data-art="bloom" data-seed="9"><img src="./img/Hanging Out.webp" alt="Hanging Out, the featured pilot artwork" data-art="hanging" data-seed="8" data-label="Hanging Out" onerror="ccFallback(this)" /></div>
+          <div class="art-slot" data-art="hanging" data-seed="8"></div>
         </div>
       </div>
     </section>
@@ -1774,7 +2140,7 @@ fieldset.field{border:0;padding:0}
       <div class="grid-3">
         <article class="artist reveal">
           <div class="ph">
-            <img src="./img/Hanging Out.webp" alt="Hanging Out, the featured piece by Elena Moreau"
+            <img src="./img/Hanging_Out-web.jpg" alt="Hanging Out, the featured piece by Elena Moreau"
                  data-art="hanging" data-seed="8" data-label="Hanging Out" loading="lazy" onerror="ccFallback(this)" />
           </div>
           <div class="artist-body">
@@ -1790,9 +2156,11 @@ fieldset.field{border:0;padding:0}
         </article>
 
         <article class="artist reveal">
-          <div class="ph">
-            <img src="./img/landscape.webp" alt="Moody landscape piece featured by Marcus Reed"
-                 data-art="frame" data-seed="10" data-label="Barnwood Beacon" loading="lazy" onerror="ccFallback(this)" />
+          <div class="ph" data-placeholder="1" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,var(--butter-surface),#fff);text-align:center;cursor:default">
+            <div>
+              <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:66px;height:66px;margin:0 auto 10px;border-radius:50%;background:rgba(246,168,28,.22);color:var(--butter-deep);font-weight:800;font-size:1.35rem;letter-spacing:.03em">MR</span>
+              <span style="display:block;font-size:.85rem;color:var(--muted)">Artwork photo coming soon</span>
+            </div>
           </div>
           <div class="artist-body">
             <span class="artist-medium">Reclaimed wood sculpture</span>
@@ -1808,7 +2176,7 @@ fieldset.field{border:0;padding:0}
 
         <article class="artist reveal">
           <div class="ph">
-            <img src="./img/IMG_3759.webp" alt="Pink blossom painting featured by Priya Anand"
+            <img src="./img/IMG_3759-web.jpg" alt="Pink blossom painting featured by Priya Anand"
                  data-art="bloom" data-seed="13" data-label="Champlain Sunrise" loading="lazy" onerror="ccFallback(this)" />
           </div>
           <div class="artist-body">
@@ -1825,7 +2193,7 @@ fieldset.field{border:0;padding:0}
 
         <article class="artist reveal">
           <div class="ph">
-            <img src="./img/landscape.webp" alt="Landscape photograph featured by Tomas Whitfield"
+            <img src="./img/landscape-web.jpg" alt="Landscape photograph featured by Tomas Whitfield"
                  data-art="frame" data-seed="15" data-label="Strand Marquee" loading="lazy" onerror="ccFallback(this)" />
           </div>
           <div class="artist-body">
@@ -1842,7 +2210,7 @@ fieldset.field{border:0;padding:0}
 
         <article class="artist reveal">
           <div class="ph">
-            <img src="./img/IMG_3621.webp" alt="Sunflower folk painting featured by Ruthie Callahan"
+            <img src="./img/IMG_3621-web.jpg" alt="Sunflower folk painting featured by Ruthie Callahan"
                  data-art="bloom" data-seed="16" data-label="Coop Garden" loading="lazy" onerror="ccFallback(this)" />
           </div>
           <div class="artist-body">
@@ -1867,9 +2235,43 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+    <section class="section" id="artPrints">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Art prints &amp; the Art Club</span>
+        <h2>Take a local artwork home, in the size that fits your wall.</h2>
+        <p class="lead">Every piece in the showcase is available as a print, made by a trusted print partner and shipped or picked up locally.</p>
+      </div>
+      <div class="grid-2">
+        <article class="price-card reveal">
+          <span class="price-kicker">Prints in four sizes</span>
+          <h3>Order an art print</h3>
+          <ul class="sizes"><li><b>5 × 7"</b><span>$15</span></li><li><b>8 × 10"</b><span>$25</span></li><li><b>11 × 14"</b><span>$40</span></li><li><b>16 × 20"</b><span>$65</span></li></ul>
+          <span class="tag tag-amber">[Sample Pricing: Confirm print partner]</span>
+          <p>Archival paper, printed to order. Tell us the piece and size and we'll confirm the price and timing.</p>
+          <button class="btn btn-marigold" data-nav="about" data-focus="inquiryForm" data-intent="prints">Order a print</button>
+        </article>
+        <article class="price-card is-featured reveal">
+          <span class="price-kicker">Monthly membership</span>
+          <h3>The Art Club</h3>
+          <div class="price">$22 <span class="unit">/ month</span></div>
+          <span class="tag tag-amber">[Sample Pricing: Confirm at Meeting]</span>
+          <ul class="checks tight">
+            <li>A new 8 × 10" print by a local artist every month</li>
+            <li>Artist story card with every delivery</li>
+            <li>Pause or cancel any time</li>
+          </ul>
+          <button class="btn btn-emerald" data-nav="about" data-focus="inquiryForm" data-intent="art-club">Join the Art Club</button>
+        </article>
+      </div>
+      <div class="club-foot reveal">
+        <div><b>Protected artwork</b><span>Art images are shown at low resolution, and we ask AI crawlers not to use them.</span></div>
+        <div><b>Pay your way</b><ul class="pay" aria-label="Accepted payments"><li>Venmo</li><li>PayPal</li><li>Credit / debit card</li></ul></div>
+      </div>
+    </section>
+
     <section class="combo reveal" id="artistApply">
       <div class="combo-art">
-        <div class="ph" style="border-radius:18px"><img src="./img/IMG_3759.webp" alt="Blossom painting from the artist showcase" data-art="frame" data-seed="17" data-label="Showcase piece" loading="lazy" onerror="ccFallback(this)" /></div>
+        <div class="ph" style="border-radius:18px"><div class="art-slot" data-art="frame" data-seed="17"></div></div>
       </div>
       <div class="combo-copy">
         <span class="tag tag-amber">[Collaborative commission terms: final at meeting]</span>
@@ -1913,11 +2315,10 @@ fieldset.field{border:0;padding:0}
       <div class="hero-grid">
         <div class="reveal">
           <span class="eyebrow is-coral">About &amp; Contact</span>
-          <h1>How a Plattsburgh flower stand became Colorful Creations.</h1>
+          <h1>Flowers, faces and art, under one colorful name.</h1>
           <p class="lead">
-            Colorful Creations grew out of a simple observation: the same people who buy flowers at the Coop are
-            the ones booking face painters for birthdays, and both are looking for local art to hang on the wall.
-            So we brought all three under one friendly name.
+            Colorful Creations brings homegrown flowers, face painting and local art together, based in Peru, NY
+            and serving Clinton County.
           </p>
           <div class="btn-row" style="margin-top:24px">
             <button class="btn btn-coral" data-scroll="inquiryForm">Start an inquiry</button>
@@ -1933,28 +2334,17 @@ fieldset.field{border:0;padding:0}
     <section class="section">
       <div class="story-card reveal">
         <span class="eyebrow">Founder story</span>
-        <h2>It started with one too-many bouquets on the kitchen table.</h2>
-        <p>
-          What began as extra buckets of homegrown stems on a Plattsburgh porch turned into weekly runs to the
-          North Country Coop. Friends started asking for birthday face painting after seeing photos from a
-          neighborhood block party. Then a customer asked whether the watercolor over the mantel, a piece by a
-          Clinton County artist, was for sale.
-        </p>
-        <p>
-          That was the lightbulb moment: <b>flowers, face painting and local art aren't three separate businesses;
-          they're one personality.</b> Joyful, handmade and proudly local. Today Colorful Creations serves families,
-          schools, libraries, cafés, salons and campus groups across Plattsburgh and Clinton County, and we're
-          building the region's friendliest little directory of local artists while we're at it.
-        </p>
-        <p>
-          We still cut stems the morning of your event, learn every kid's name in the painting line, and answer the
-          phone ourselves, because in the North Country, that's how business is done.
+        <h2>Your story goes here.</h2>
+        <p class="muted">
+          <span class="tag tag-amber">[Founder story to add]</span><br />
+          How Colorful Creations started, why flowers, face painting and art belong together, and what makes it
+          yours. We'll write this together from your own words.
         </p>
         <div class="story-sig">
           <span class="avatar"><span class="art-slot" data-art="face" data-seed="2"></span></span>
           <span>
-            <b>The Colorful Creations founder <span class="tag tag-mini" style="vertical-align:middle">[Name &amp; photo to add]</span></b>
-            <span>Plattsburgh, NY, serving Clinton County since day one</span>
+            <b>Andrea Hoffman, founder <span class="tag tag-mini" style="vertical-align:middle">[Photo to add]</span></b>
+            <span>Peru, NY, serving Clinton County</span>
           </span>
         </div>
       </div>
@@ -1970,25 +2360,25 @@ fieldset.field{border:0;padding:0}
       <div class="contact-grid">
         <aside class="contact-card reveal">
           <h3>Talk to a real local</h3>
-          <p>No call centers or ticket numbers, just the studio.</p>
+          <p>No call centers or ticket numbers, just a real local person.</p>
           <ul class="c-list">
             <li>
               <span class="c-ic" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.5 3.5h3l1.5 4-2 1.2a11 11 0 0 0 4.3 4.3l1.2-2 4 1.5v3c0 .8-.7 1.5-1.5 1.5A13.5 13.5 0 0 1 3 5c0-.8.7-1.5 1.5-1.5z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
               </span>
-              <span><b>Phone</b><a href="tel:+15185550142">(518) 555-0142</a></span>
+              <span><b>Phone</b><a href="tel:+15185726529">(518) 572-6529</a></span>
             </li>
             <li>
               <span class="c-ic" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="4.5" width="15" height="11" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M3 6l7 5 7-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
               </span>
-              <span><b>Email</b><a href="mailto:hello@colorfulcreationsny.com">hello@colorfulcreationsny.com</a></span>
+              <span><b>Email</b><a href="mailto:contact@colorfulcreations.us">contact@colorfulcreations.us</a></span>
             </li>
             <li>
               <span class="c-ic" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17.5s6-4.6 6-9a6 6 0 1 0-12 0c0 4.4 6 9 6 9z" stroke="#fff" stroke-width="1.6"/><circle cx="10" cy="8.5" r="2.2" stroke="#fff" stroke-width="1.6"/></svg>
               </span>
-              <span><b>Studio</b><span>Plattsburgh, NY, by appointment</span></span>
+              <span><b>Based in</b><span>Peru, NY. No storefront: pickups and events by arrangement</span></span>
             </li>
           </ul>
 
@@ -2000,10 +2390,10 @@ fieldset.field{border:0;padding:0}
             </span>
           </div>
 
+          <ul class="social" aria-label="Social media"><li><a href="#" aria-label="Instagram (link to be added)">Instagram</a></li><li><a href="#" aria-label="Facebook (link to be added)">Facebook</a></li></ul>
+
           <div class="radius">
-            <b>Service area:</b> Plattsburgh, Morrisonville, Schuyler Falls, Peru, Rouses Point, Cadyville and
-            greater Clinton County, roughly a 35-minute drive. Saranac Lake, Lake Placid, Malone and Burlington, VT
-            available with a modest travel fee.
+            <b>Service area:</b> Peru, NY and Clinton County. <span class="tag tag-mini">[Confirm travel area &amp; fees]</span>
           </div>
         </aside>
 
@@ -2037,7 +2427,7 @@ fieldset.field{border:0;padding:0}
 
           <div class="form-foot">
             <button class="btn btn-coral btn-lg" type="submit">Send Inquiry</button>
-            <span class="hint">Prefer voice? <b>(518) 555-0142</b>, Tue to Sat, 9am to 6pm</span>
+            <span class="hint">Prefer voice? <b>(518) 572-6529</b></span>
           </div>
         </form>
       </div>
@@ -2053,23 +2443,11 @@ fieldset.field{border:0;padding:0}
     <div class="ftr-grid">
       <div>
         <a class="brand" href="#home" data-nav="home">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 42 42">
-              <rect width="42" height="42" rx="13" fill="#3E9E5B"/>
-              <g fill="#F6A81C">
-                <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6"/>
-                <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(72 21 21)"/>
-                <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(144 21 21)"/>
-                <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(216 21 21)"/>
-                <ellipse cx="21" cy="13.2" rx="4.6" ry="7.6" transform="rotate(288 21 21)"/>
-              </g>
-              <circle cx="21" cy="21" r="5" fill="#F2543F"/>
-              <circle cx="21" cy="21" r="2" fill="#FFFDF9"/>
-            </svg>
+          <span class="brand-mark" aria-hidden="true"><img src="./img/logo-cosmos.png" alt="" width="44" height="44" />
           </span>
           <span class="brand-text">
             <strong>Colorful Creations</strong>
-            <small>Plattsburgh &amp; Clinton County</small>
+            <small>Peru, NY &amp; Clinton County</small>
           </span>
         </a>
         <p style="margin-top:16px">Homegrown flowers, joyful face painting, and a curated showcase of local art, all from the North Country.</p>
@@ -2093,6 +2471,9 @@ fieldset.field{border:0;padding:0}
           <li><button data-nav="flowers">Weekly Subscriptions</button></li>
           <li><button data-nav="face">Party Face Painting</button></li>
           <li><button data-nav="face">Ultimate Party Combo</button></li>
+          <li><button data-nav="face" data-focus="painters">Find a Face Painter</button></li>
+          <li><button data-nav="flowers" data-focus="flowerClub">Flower Club</button></li>
+          <li><button data-nav="art" data-focus="artPrints">Art Prints &amp; Art Club</button></li>
           <li><button data-nav="art">Local Artist Listing</button></li>
         </ul>
       </div>
@@ -2100,17 +2481,19 @@ fieldset.field{border:0;padding:0}
       <div>
         <h3>Contact</h3>
         <ul>
-          <li><a href="tel:+15185550142">(518) 555-0142</a></li>
-          <li><a href="mailto:hello@colorfulcreationsny.com">hello@colorfulcreationsny.com</a></li>
+          <li><a href="tel:+15185726529">(518) 572-6529</a></li>
+          <li><a href="mailto:contact@colorfulcreations.us">contact@colorfulcreations.us</a></li>
           <li><button data-nav="about" data-focus="inquiryForm">Book / Inquire</button></li>
-          <li><span style="color:var(--muted)">Tue to Sat, 9am to 6pm</span></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
         </ul>
       </div>
     </div>
 
     <div class="ftr-bottom">
-      <span>© <span id="year">2026</span> Colorful Creations, serving Plattsburgh and Clinton County</span>
-      <span class="demo">This is a design preview. All text, prices, and details shown here are samples.</span>
+      <span>© <span id="year">2026</span> Colorful Creations, Peru, NY, serving Clinton County</span>
+      <ul class="pay" aria-label="Accepted payments"><li>Venmo</li><li>PayPal</li><li>Credit / debit card</li></ul>
+      <span class="demo">This is a design preview. Phone and email are real; prices, names and other details are samples.</span>
     </div>
   </div>
 </footer>
@@ -2119,10 +2502,13 @@ fieldset.field{border:0;padding:0}
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
   <div class="lightbox-backdrop" data-lb-close></div>
   <figure class="lightbox-card">
-    <button class="lightbox-close" type="button" data-lb-close aria-label="Close preview"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2.5 2.5l9 9M11.5 2.5l-9 9"/></svg></button>
     <div class="lightbox-media" id="lbMedia"></div>
     <figcaption id="lbCap"></figcaption>
   </figure>
+  <span class="lb-count" id="lbCount" aria-live="polite"></span>
+  <button class="lightbox-close" type="button" data-lb-close aria-label="Close preview"><svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2.5 2.5l9 9M11.5 2.5l-9 9"/></svg></button>
+  <button class="lb-nav lb-prev" type="button" aria-label="Previous photo" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-nav lb-next" type="button" aria-label="Next photo" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </div>
 
 <script>
@@ -2136,11 +2522,11 @@ fieldset.field{border:0;padding:0}
   var STAGGER = 60;                 /* per-element entrance delay */
 
   var TITLES = {
-    home: 'Colorful Creations | Flowers, Face Painting & Local Art | Plattsburgh, NY',
-    flowers: 'Seasonal Homegrown Flowers | Colorful Creations | Plattsburgh, NY',
+    home: 'Colorful Creations | Flowers, Face Painting & Local Art | Peru, NY',
+    flowers: 'Seasonal Homegrown Flowers | Colorful Creations | Peru, NY',
     face: 'Event & Party Face Painting | Colorful Creations | Clinton County, NY',
-    art: 'Local Artist Showcase | Colorful Creations | Plattsburgh, NY',
-    about: 'About & Contact | Colorful Creations | Plattsburgh, NY'
+    art: 'Local Artist Showcase | Colorful Creations | Peru, NY',
+    about: 'About & Contact | Colorful Creations | Peru, NY'
   };
 
   /* Reveal on scroll */
@@ -2289,48 +2675,199 @@ fieldset.field{border:0;padding:0}
     if (e.key === 'Escape') { closeDrawer(); closeLightbox(); }
   });
 
-  /* Lightbox */
-  var lb = $('#lightbox'), lbMedia = $('#lbMedia'), lbCap = $('#lbCap'), lbOpener = null;
-  function openLightbox(srcNode, caption) {
-    if (!lb || !srcNode) return;
+  /* ============ Fullscreen lightbox ============ */
+  var lb = $('#lightbox'), lbMedia = $('#lbMedia'), lbCap = $('#lbCap'), lbCount = $('#lbCount'),
+      lbOpener = null, lbEntries = [], lbIndex = 0, lbScrollY = 0, lbScale = 1;
+  var lbPrev = $('.lb-prev', lb), lbNext = $('.lb-next', lb);
+
+  function lbFigCap(fig) {
+    var fc = $('figcaption', fig);
+    if (!fc) return '';
+    var tmp = fc.cloneNode(true);
+    $$('.g-cat', tmp).forEach(function (n) { n.remove(); });
+    return tmp.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function lbNodeOf(entry) {
+    var n = entry && entry.node;
+    if (!n) return null;
+    if (n.matches && n.matches('img,svg')) return n;
+    return n.querySelector('img,svg');
+  }
+
+  function lbRender() {
+    var e = lbEntries[lbIndex];
+    if (!e) return;
+    var src = lbNodeOf(e);
     lbMedia.innerHTML = '';
-    var clone = srcNode.cloneNode(true);
-    clone.style.position = 'absolute';
-    clone.style.inset = '0';
-    lbMedia.appendChild(clone);
-    lbCap.textContent = caption || '';
+    if (src) {
+      var clone = src.cloneNode(true);
+      clone.className = '';
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+      clone.loading = 'eager';
+      clone.style.position = 'static';
+      clone.style.inset = '';
+      clone.style.width = '';
+      clone.style.height = '';
+      clone.style.transform = 'scale(' + lbScale + ')';
+      clone.style.transformOrigin = 'center center';
+      lbMedia.appendChild(clone);
+    }
+    lbCap.textContent = e.caption || '';
+    var n = lbEntries.length;
+    if (lbCount) lbCount.textContent = n > 1 ? (lbIndex + 1) + ' / ' + n : '';
+    if (lbPrev) lbPrev.hidden = n < 2;
+    if (lbNext) lbNext.hidden = n < 2;
+  }
+
+  function lbStep(d) {
+    if (lbEntries.length < 2) return;
+    lbIndex = (lbIndex + d + lbEntries.length) % lbEntries.length;
+    lbScale = 1;
+    lbRender();
+  }
+
+  function openLightbox(srcNode, caption, entries, index) {
+    if (!lb || !srcNode) return;
+    if (entries && entries.length) {
+      lbEntries = entries;
+      if (typeof index === 'number' && index >= 0) {
+        lbIndex = Math.min(index, entries.length - 1);
+      } else {
+        lbIndex = 0;
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].node === srcNode) { lbIndex = i; break; }
+        }
+      }
+    } else {
+      lbEntries = [{ node: srcNode, caption: caption || '' }];
+      lbIndex = 0;
+    }
+    lbScale = 1;
+    lbScrollY = window.scrollY || window.pageYOffset || 0;
+    lbRender();
     lb.classList.add('open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     lbOpener = document.activeElement;
     var closeBtn = $('.lightbox-close', lb);
-    if (closeBtn) closeBtn.focus();
+    if (closeBtn) { try { closeBtn.focus({ preventScroll: true }); } catch (err) { closeBtn.focus(); } }
   }
+
   function closeLightbox() {
     if (!lb || !lb.classList.contains('open')) return;
     lb.classList.remove('open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
-    if (lbOpener && lbOpener.focus) { try { lbOpener.focus(); } catch (e) {} }
+    /* return the page to the exact spot it was in before the viewer opened */
+    try { window.scrollTo(0, lbScrollY); } catch (err) {}
+    if (lbOpener && lbOpener !== document.body && lbOpener.focus) {
+      try { lbOpener.focus({ preventScroll: true }); } catch (err) { try { lbOpener.focus(); } catch (e2) {} }
+    } else if (document.activeElement && document.activeElement.blur) {
+      /* opener was the page itself (non-focusable tile): drop focus back to the document
+         instead of leaving it on the now-hidden close button */
+      try { document.activeElement.blur(); } catch (err) {}
+    }
     lbOpener = null;
+    lbEntries = []; lbIndex = 0; lbScale = 1;
+    if (lbCount) lbCount.textContent = '';
     setTimeout(function () { if (!lb.classList.contains('open') && lbMedia) lbMedia.innerHTML = ''; }, 320);
   }
+
+  /* arrows */
+  if (lbPrev) lbPrev.addEventListener('click', function () { lbStep(-1); });
+  if (lbNext) lbNext.addEventListener('click', function () { lbStep(1); });
+
+  /* keyboard navigation while open (Escape is handled globally) */
+  document.addEventListener('keydown', function (e) {
+    if (!lb || !lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); lbStep(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); lbStep(1); }
+    else if (e.key === 'Home') { e.preventDefault(); lbIndex = 0; lbScale = 1; lbRender(); }
+    else if (e.key === 'End') { e.preventDefault(); lbIndex = lbEntries.length - 1; lbScale = 1; lbRender(); }
+  });
+
+  /* keep Tab inside the dialog */
+  lb.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var f = $$('button:not([hidden])', lb);
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* touch: swipe between images, pinch to zoom (1x - 4x) */
+  var tX = 0, tY = 0, pinchStart = 0, scaleStart = 1, pinching = false;
+  lb.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 2) {
+      pinching = true;
+      pinchStart = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                              e.touches[0].clientY - e.touches[1].clientY);
+      scaleStart = lbScale;
+    } else if (e.touches.length === 1 && !pinching) {
+      tX = e.touches[0].clientX; tY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+  lb.addEventListener('touchmove', function (e) {
+    if (!pinching || e.touches.length !== 2 || !pinchStart) return;
+    var d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                       e.touches[0].clientY - e.touches[1].clientY);
+    lbScale = Math.max(1, Math.min(4, scaleStart * (d / pinchStart)));
+    var m = lbMedia.firstElementChild;
+    if (m) m.style.transform = 'scale(' + lbScale + ')';
+  }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (pinching) {
+      if (e.touches.length === 0) { pinching = false; pinchStart = 0; }
+      return;
+    }
+    if (e.changedTouches.length !== 1) return;
+    var dx = e.changedTouches[0].clientX - tX;
+    var dy = e.changedTouches[0].clientY - tY;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) lbStep(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* openers: gallery grid, artist cards */
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-lb-close]')) { closeLightbox(); return; }
+
     var fig = e.target.closest('.g-item');
     if (fig && !fig.classList.contains('is-hidden')) {
       var media = $('.ph', fig);
       if (media) {
-        var fc = $('figcaption', fig), cap = '';
-        if (fc) { var tmp = fc.cloneNode(true); tmp.querySelectorAll('.g-cat').forEach(function (n) { n.remove(); }); cap = tmp.textContent.replace(/\s+/g, ' ').trim(); }
-        openLightbox(media, cap);
+        var cap = lbFigCap(fig);
+        var gridEl = fig.closest('[data-grid]');
+        var entries = [], start = 0;
+        if (gridEl) {
+          $$('.g-item', gridEl).forEach(function (g) {
+            if (g.classList.contains('is-hidden')) return;
+            var m = $('.ph', g);
+            if (!m) return;
+            if (g === fig) start = entries.length;
+            entries.push({ node: m, caption: lbFigCap(g) });
+          });
+        }
+        if (entries.length) openLightbox(media, cap, entries, start);
+        else openLightbox(media, cap);
       }
       return;
     }
+
     var ph = e.target.closest('.artist .ph');
-    if (ph) {
-      var card = ph.closest('.artist');
-      var name = card ? $('h3', card) : null;
-      var med = card ? $('.artist-medium', card) : null;
-      openLightbox(ph, (name ? name.textContent : '') + (med ? ', ' + med.textContent : ''));
+    if (ph && !ph.dataset.placeholder) {
+      var aEntries = [], aStart = 0;
+      $$('#page-art .artist .ph').forEach(function (p) {
+        if (p.dataset.placeholder || !p.querySelector('img,svg')) return;
+        var c = p.closest('.artist');
+        var n = c ? $('h3', c) : null;
+        var md = c ? $('.artist-medium', c) : null;
+        if (p === ph) aStart = aEntries.length;
+        aEntries.push({ node: p, caption: (n ? n.textContent : '') + (md ? ', ' + md.textContent : '') });
+      });
+      if (aEntries.length) openLightbox(ph, '', aEntries, aStart);
+      else openLightbox(ph, '');
     }
   });
 
@@ -2374,6 +2911,12 @@ fieldset.field{border:0;padding:0}
         message: 'Hi! I\'m a Clinton County artist and would like to apply to list my work in the pilot showcase. ' +
           'My medium is ______ and here\'s a link to my portfolio: ______'
       };
+    } else if (el.dataset.intent === 'prints') {
+      pending = { topic: 'Buy or List Art', message: 'Hi! I\'d like to order an art print of ______ in size ______ (5×7, 8×10, 11×14 or 16×20).' };
+    } else if (el.dataset.intent === 'art-club') {
+      pending = { topic: 'Buy or List Art', message: 'Hi! I\'d like to join the monthly Art Club. Please send me the details.' };
+    } else if (el.dataset.intent === 'join-painters') {
+      pending = { topic: 'Face Painting / Party Package', message: 'Hi! I\'m a face painter and would like to be listed on the Colorful Creations painter hub. Here is my portfolio: ______' };
     } else if (el.dataset.intent === 'combo') {
       pending = {
         topic: 'Face Painting / Party Package',
@@ -2403,6 +2946,13 @@ fieldset.field{border:0;padding:0}
       }
       return;
     }
+  });
+
+  /* Image protection: no right-click save or drag on artwork and the lightbox */
+  ['contextmenu', 'dragstart'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.closest && e.target.closest('#page-art img, .lightbox img')) e.preventDefault();
+    });
   });
 
   /* Confirmation helper */
@@ -2517,7 +3067,7 @@ fieldset.field{border:0;padding:0}
         (tweak ? '<li><b>Good to know</b>' + tweak + '</li>' : '') +
         '</ul>' +
         '<p style="margin-top:12px">Sample pricing is shown on the packages above. <b>[Client to confirm rates]</b> before we send the official quote. ' +
-        'Call <b>(518) 555-0142</b> or send the inquiry below to hold the date.</p>' +
+        'Call <b>(518) 572-6529</b> or send the inquiry below to hold the date.</p>' +
         '<button type="button" class="btn btn-coral btn-sm" data-nav="about" data-focus="inquiryForm" data-intent="combo">Send this plan as an inquiry</button>'
       );
     });
@@ -2533,11 +3083,11 @@ fieldset.field{border:0;padding:0}
       var first = String(d.get('name')).split(' ')[0];
       showConfirm(inquiryForm,
         '<div class="confirm-title"><span class="ic">&#10003;</span>Thanks, ' + first + ', message received!</div>' +
-        '<p>Your <b>' + esc(d.get('topic')) + '</b> inquiry is with the studio. We reply within <b>one business day</b> at <b>' +
+        '<p>Your <b>' + esc(d.get('topic')) + '</b> inquiry is with us. We reply within <b>one business day</b> at <b>' +
         esc(d.get('email')) + '</b>.</p>' +
         '<ul>' +
         '<li><b>Next step</b>We\'ll confirm availability, pricing and any details we need.</li>' +
-        '<li><b>Need it faster?</b>Call (518) 555-0142, Tue to Sat, 9am to 6pm.</li>' +
+        '<li><b>Need it faster?</b>Call (518) 572-6529.</li>' +
         '</ul>' +
         '<button type="button" class="btn btn-outline btn-sm" data-nav="home">Back to home</button>'
       );
@@ -2566,7 +3116,6 @@ fieldset.field{border:0;padding:0}
       ['DSCF6696.webp', 'Table Blooms', 'Table Blooms'],
       ['DSCF7048.webp', 'Wedding Bouquets', 'Wedding Bouquets'],
       ['DSCF7204.webp', 'Flower Crown', 'Flower Crown'],
-      ['IMG_3727.webp', 'Spring Tulips', 'Spring Tulips'],
       ['IMG_3885.webp', 'Steps in Bloom', 'Steps in Bloom'],
       ['IMG_4040.webp', 'Market Jars', 'Market Jars'],
       ['IMG_4042.webp', 'Dahlia and Rose arrangement', 'Dahlia & Rose'],
@@ -2575,32 +3124,25 @@ fieldset.field{border:0;padding:0}
       ['IMG_4174.webp', 'Hydrangea Harvest', 'Hydrangea Harvest'],
       ['IMG_4181.webp', 'Crate of Colors', 'Crate of Colors'],
       ['IMG_4186.webp', 'Porch Posy', 'Porch Posy'],
-      ['IMG_4193.webp', 'Market Morning', 'Market Morning'],
       ['IMG_4195.webp', 'Our Market Table', 'Our Market Table'],
       ['IMG_4213.webp', 'Autumn Harvest', 'Autumn Harvest'],
       ['IMG_4252.webp', 'Banquet Blooms', 'Banquet Blooms'],
       ['IMG_4253.webp', 'Barn Reception', 'Barn Reception'],
-      ['IMG_4259(1).webp', 'Reception Blooms', 'Reception Blooms'],
       ['IMG_4259.webp', 'Table Trio', 'Table Trio'],
       ['IMG_4335.webp', 'Wedding Party', 'Wedding Party'],
       ['IMG_4344.webp', 'Confetti Bouquet', 'Confetti Bouquet'],
-      ['IMG_4580.webp', 'Handpicked', 'Handpicked'],
       ['IMG_4581.webp', 'Jewel Tones', 'Jewel Tones'],
-      ['IMG_4676.webp', 'Lace and Roses', 'Lace & Roses'],
       ['IMG_4679.webp', 'Crimson Bunch', 'Crimson Bunch'],
       ['IMG_6630.webp', 'Countryside Basket', 'Countryside Basket'],
       ['IMG_4682.webp', 'Anemone Bouquet', 'Anemone Bouquet'],
       ['IMG_4685.webp', 'Green and Gold', 'Green & Gold'],
       ['IMG_4687.webp', 'Show Bouquet', 'Show Bouquet'],
       ['IMG_4757.webp', 'Daisy Bucket', 'Daisy Bucket'],
-      ['IMG_4890.webp', 'Color Burst', 'Color Burst'],
-      ['IMG_4892.webp', 'Dahlia Basket', 'Dahlia Basket'],
       ['IMG_4941.webp', 'Plum and Blush', 'Plum & Blush'],
       ['IMG_5034.webp', 'Zinnia Party', 'Zinnia Party'],
       ['IMG_5229.webp', 'Farmers\' Market', 'Farmers\' Market'],
       ['IMG_5232.webp', 'Sunshine Bunch', 'Sunshine Bunch'],
       ['IMG_5235.webp', 'Gerbera Glow', 'Gerbera Glow'],
-      ['IMG_5360.webp', 'Hello Sunflower', 'Hello Sunflower'],
       ['IMG_5394.webp', 'Pop-up Blooms', 'Pop-up Blooms'],
       ['IMG_5404.webp', 'Sunflower Vase', 'Sunflower Vase'],
       ['IMG_6620.webp', 'Buttercream Roses', 'Buttercream Roses'],
@@ -2608,9 +3150,6 @@ fieldset.field{border:0;padding:0}
       ['IMG_7222.webp', 'Zinnia Posy', 'Zinnia Posy']
     ],
     face: [
-      ['Cosmos white.webp', 'White Cosmos face paint design', 'White Cosmos'],
-      ['cosmos.webp', 'Pink Cosmos face paint design', 'Pink Cosmos'],
-      ['IMG_3060.webp', 'Cosmos Canvas face paint design', 'Cosmos Canvas'],
       ['Batmans.webp', 'Two children dressed in Batman costumes', 'Superhero fans'],
       ['IMG_5088.webp', 'Boy with a brown and white puppy muzzle painted on his face', 'Puppy muzzle'],
       ['IMG_5097.webp', 'Two friends with red and white clown face paint at the market', 'Clown faces at the market'],
@@ -2619,23 +3158,22 @@ fieldset.field{border:0;padding:0}
       ['IMG_5381.webp', 'Young man with colorful tiger stripe face paint', 'Tiger stripes'],
       ['IMG_5491.webp', 'Three jack-o-lanterns painted on a forearm', 'Pumpkin arm art'],
       ['IMG_5757.webp', 'Face painter working on a design', 'Painting in progress'],
-      ['IMG_5771.webp', 'Face painter at the booth', 'At the booth'],
       ['IMG_5772.webp', 'Face painter creating a design', 'Design in progress'],
       ['IMG_9858.webp', 'Woman with a black and white cat face paint design', 'Cat face'],
       ['Joker.webp', 'Boy with a Joker face paint design', 'Joker look'],
       ['Little__Hulk.webp', 'Boy with green Hulk face paint', 'Little Hulk'],
-      ['Little_Hulk_2.webp', 'Girl roaring with green Hulk face paint', 'Hulk roar'],
       ['Pina_and_silver_butterfly.webp', 'Girl with a pink and silver butterfly face paint design', 'Silver butterfly'],
       ['Puppy.webp', 'Girl with a puppy dog face paint design', 'Puppy dog'],
       ['Rainbow_butterfly.webp', 'Girl with rainbow butterfly wings face paint', 'Rainbow wings'],
-      ['Spider-Man.webp', 'Boy in a striped suit with a Spider-Man mask face paint design', 'Spider-Man mask'],
       ['Spiderman_2.webp', 'Smiling boy with a Spider-Man face paint design', 'Spider-Man smile']
     ],
+    /* the four real pieces now sit on the artist cards above, so this gallery
+       shows the site's illustrated artwork until showcase photos are supplied */
     art: [
-      ['Hanging Out.webp', 'Hanging Out watercolor painting', 'Hanging Out'],
-      ['IMG_3621.webp', 'Happiness Blooms folk painting', 'Happiness Blooms'],
-      ['IMG_3759.webp', 'Spring Blossoms painting', 'Spring Blossoms'],
-      ['landscape.webp', 'Winter Marsh landscape photograph', 'Winter Marsh']
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon'],
+      ['illustrated', 'Illustrated placeholder artwork', 'Artwork photo coming soon']
     ]
   };
 
@@ -2656,6 +3194,18 @@ fieldset.field{border:0;padding:0}
           imgEl.dataset.fb = '1';
           imgEl.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(window.ccArt(artKind, seed));
         });
+      }
+
+      /* the art gallery is illustrated artwork (the four real pieces now live
+         on the artist cards); every other gallery serves real photos.
+         The hanging/abstract framed variants are deterministic, so rotate
+         through them plus two seed-varied blooms to keep all four distinct. */
+      function srcOf(it, k) {
+        if (key === 'art') {
+          var kinds = ['hanging', 'bloom', 'frame', 'bloom'];
+          return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(window.ccArt(kinds[k % kinds.length], (k % 7) + 1));
+        }
+        return './img/' + it[0];
       }
 
       /* slideshow chrome */
@@ -2692,7 +3242,7 @@ fieldset.field{border:0;padding:0}
         ti.alt = '';
         ti.loading = 'lazy';
         ti.decoding = 'async';
-        ti.src = './img/' + it[0];
+        ti.src = srcOf(it, k);
         guard(ti, (k % 7) + 1);
         b.appendChild(ti);
         b.addEventListener('click', function () { setSlide(k); bump(); });
@@ -2703,7 +3253,7 @@ fieldset.field{border:0;padding:0}
         i = ((idx % n) + n) % n;
         var it = items[i];
         img.dataset.fb = '';
-        img.src = './img/' + it[0];
+        img.src = srcOf(it, i);
         img.alt = it[1];
         stage.dataset.cap = it[2];
         meta.querySelector('.ss-caption').textContent = it[2];
@@ -2711,11 +3261,20 @@ fieldset.field{border:0;padding:0}
         var tbs = thumbs.children;
         for (var k = 0; k < tbs.length; k++) tbs[k].classList.toggle('is-on', k === i);
         var act = tbs[i];
-        if (act && act.scrollIntoView) {
-          try { act.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduced ? 'auto' : 'smooth' }); } catch (e) {}
+        if (act) {
+          /* scroll ONLY the thumbnail strip container, never the window */
+          var target = act.offsetLeft - (thumbs.clientWidth - act.offsetWidth) / 2;
+          var max = thumbs.scrollWidth - thumbs.clientWidth;
+          var left = Math.max(0, Math.min(target, max));
+          if (thumbs.scrollTo) {
+            try { thumbs.scrollTo({ left: left, behavior: reduced ? 'auto' : 'smooth' }); }
+            catch (e) { thumbs.scrollLeft = left; }
+          } else {
+            thumbs.scrollLeft = left;
+          }
         }
         var nxt = new Image();   /* warm the next photo so swipes feel instant */
-        nxt.src = './img/' + items[(i + 1) % n][0];
+        nxt.src = srcOf(items[(i + 1) % n], (i + 1) % n);
       }
 
       /* controls */
@@ -2723,7 +3282,16 @@ fieldset.field{border:0;padding:0}
       $('.ss-next', ss).addEventListener('click', function () { setSlide(i + 1); bump(); });
       stage.addEventListener('click', function (e) {
         if (e.target.closest('.ss-btn')) return;
-        openLightbox(img, stage.dataset.cap || '');
+        /* open the full album so arrows/swipe/counter work from the slideshow */
+        var entries = [], start = 0;
+        $$('.g-item', grid).forEach(function (g) {
+          var m = $('.ph', g);
+          if (!m) return;
+          if (entries.length === i) start = entries.length;
+          entries.push({ node: m, caption: lbFigCap(g) });
+        });
+        if (entries.length) openLightbox(img, stage.dataset.cap || '', entries, start);
+        else openLightbox(img, stage.dataset.cap || '');
       });
       ss.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowLeft') { e.preventDefault(); setSlide(i - 1); bump(); }
@@ -2736,24 +3304,40 @@ fieldset.field{border:0;padding:0}
       stage.addEventListener('touchend', function (e) {
         var dx = e.changedTouches[0].clientX - tx;
         if (Math.abs(dx) > 44) setSlide(dx < 0 ? i + 1 : i - 1);
+        touched = false;
         resume();
       }, { passive: true });
 
-      /* gentle autoplay, always yielding to the visitor */
+      /* gentle autoplay: only runs while the gallery is actually on screen */
+      var inView = false, hovered = false, focused = false, touched = false;
       function pause() { if (timer) { clearInterval(timer); timer = null; } }
-      function resume() { if (reduced || timer) return; timer = setInterval(function () { setSlide(i + 1); }, 5200); }
-      function bump() { pause(); resume(); }
-      ss.addEventListener('mouseenter', pause);
-      ss.addEventListener('mouseleave', resume);
-      ss.addEventListener('focusin', pause);
-      ss.addEventListener('focusout', resume);
-      ss.addEventListener('touchstart', pause, { passive: true });
+      function resume() {
+        pause();
+        if (reduced || !inView || hovered || focused || touched) return;
+        timer = setInterval(function () { setSlide(i + 1); }, 5200);
+      }
+      function bump() { resume(); }
+      ss.addEventListener('mouseenter', function () { hovered = true; pause(); });
+      ss.addEventListener('mouseleave', function () { hovered = false; resume(); });
+      ss.addEventListener('focusin', function () { focused = true; pause(); });
+      ss.addEventListener('focusout', function () { focused = false; resume(); });
+      ss.addEventListener('touchstart', function () { touched = true; pause(); }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        var vo = new IntersectionObserver(function (entries) {
+          inView = entries[0].isIntersecting;
+          if (inView) resume(); else pause();
+        }, { threshold: 0.25 });
+        vo.observe(ss);
+      } else {
+        inView = true;
+      }
 
       /* responsive grid below the slideshow */
       var html = '';
       for (var g = 0; g < n; g++) {
         var it = items[g];
-        html += '<figure class="g-item"><div class="ph"><img src="./img/' + esc(it[0]) + '" alt="' + esc(it[1]) +
+        html += '<figure class="g-item"><div class="ph"><img src="' + srcOf(it, g) + '" alt="' + esc(it[1]) +
           '" data-art="' + artKind + '" data-seed="' + ((g % 7) + 1) + '" data-label="' + esc(it[2]) +
           '" loading="lazy" decoding="async" onerror="ccFallback(this)" /></div><figcaption>' + esc(it[2]) + '</figcaption></figure>';
       }
@@ -2779,6 +3363,11 @@ fieldset.field{border:0;padding:0}
 
   /* Init */
   function init() {
+    /* we decide where a reload lands (the URL hash), not the browser's
+       scroll restoration, which would otherwise restore the pre-reload
+       position (e.g. deep inside a gallery) */
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+
     /* illustrated art slots */
     $$('.art-slot').forEach(function (el) {
       if (!el.innerHTML.trim()) el.innerHTML = window.ccArt(el.dataset.art, parseInt(el.dataset.seed || '1', 10));
