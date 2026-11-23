@@ -1183,6 +1183,63 @@ fieldset.field{border:0;padding:0}
   font-size:.66rem;font-weight:800;letter-spacing:.06em;
 }
 
+
+/* ============ Feature round ============ */
+.sec-head .accent,.eyebrow{font-family:var(--accent);font-weight:400;letter-spacing:.02em}
+.cc-notice{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin:0 0 26px;padding:16px 20px;border-radius:var(--r-md);background:linear-gradient(120deg,#FFF1C9,#FFD9CF);border:1.5px dashed rgba(178,46,32,.45)}
+.cc-notice p{margin:0;font-weight:600;color:var(--ink);flex:1 1 240px}
+.cc-notice b{font-family:var(--accent);font-weight:400;font-size:1.05rem;color:var(--blush-deep);display:block}
+.split-strip{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,48px);align-items:center;margin:0 0 clamp(36px,5vw,64px);padding:clamp(22px,3vw,38px);border-radius:var(--r-lg);background:linear-gradient(135deg,var(--sage-surface),#FFF1C9)}
+.split-strip h2{margin-bottom:.4em}
+.ph-frame{aspect-ratio:4/3;border-radius:60% 40% 55% 45%/50% 55% 45% 50%;border:2.5px dashed rgba(30,107,60,.5);background:rgba(255,255,255,.65);display:grid;place-items:center;text-align:center;padding:22px;color:var(--sage-deep);font-weight:700}
+.honesty{display:flex;gap:14px;align-items:flex-start;margin-top:26px;padding:18px 22px;border-radius:var(--r-md);background:var(--lav-surface);border:1.5px solid rgba(139,61,240,.25)}
+.honesty b{font-family:var(--accent);font-weight:400;color:var(--lav-deep)}
+.honesty p{margin:0}
+.addons{margin-top:30px;padding:clamp(22px,3vw,34px);border-radius:var(--r-lg);background:var(--paper);border:1.5px solid rgba(139,61,240,.2);box-shadow:var(--shadow-soft)}
+.addons h3{margin-bottom:.3em}
+.addon-list{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.addon-list li{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:12px 16px;border-radius:var(--r-sm);background:var(--lav-surface);font-weight:600}
+.addon-list li b{color:var(--lav-deep);white-space:nowrap}
+.know-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:22px}
+.know{padding:16px 18px;border-radius:var(--r-sm);background:var(--sage-surface);font-weight:600;font-size:.95rem}
+.know b{display:block;font-family:var(--accent);font-weight:400;font-size:1.05rem;color:var(--sage-deep);margin-bottom:2px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}
+.testi{margin:0;padding:22px;border-radius:var(--r-md);background:var(--paper);border:1.5px solid rgba(255,255,255,.9);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;gap:14px}
+.testi blockquote{margin:0;font-family:var(--serif);font-size:1.05rem;line-height:1.5;color:var(--ink)}
+.testi figcaption{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.92rem}
+.testi figcaption small{display:block;font-weight:600;color:var(--muted)}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--accent);color:#fff;background:var(--lav);flex-shrink:0}
+.avatar.is-coral{background:var(--blush)}.avatar.is-green{background:var(--sage)}
+.sample-line{margin:16px 0 0;font-size:.88rem;font-weight:600;color:var(--muted)}
+.review-cta{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:18px 22px;border-radius:var(--r-md);background:var(--blush-surface);border:1.5px dashed rgba(242,84,63,.5)}
+.review-cta p{margin:0;font-weight:600;flex:1 1 220px}
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;margin:0 0 clamp(30px,4vw,50px)}
+.concept{padding:clamp(20px,2.6vw,30px);border-radius:var(--r-lg);color:#FFFDF9}
+.concept h3{color:#FFFDF9;margin-bottom:.3em}
+.concept p{margin:0 0 14px}
+.concept.is-plum{background:linear-gradient(135deg,#3B1A52,#6B2A8C)}
+.concept.is-leaf{background:linear-gradient(135deg,#145C34,#2E8B57)}
+.concept .tag{background:rgba(255,255,255,.18);color:#FFFDF9;border-color:rgba(255,255,255,.55)}
+.fpills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.fpill{font:700 .86rem var(--rounded);padding:9px 16px;border-radius:var(--r-pill);border:1.5px solid rgba(139,61,240,.35);background:var(--paper);color:var(--lav-deep);cursor:pointer}
+.fpill[aria-pressed="true"]{background:var(--lav);color:#fff;border-color:var(--lav)}
+/* Book / Inquire dropdown */
+.book-menu{position:relative}
+.book-menu>.btn::after{content:"";display:inline-block;margin-left:8px;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.book-list{position:absolute;right:0;top:calc(100% + 10px);min-width:236px;margin:0;padding:8px;list-style:none;background:var(--paper);border-radius:var(--r-sm);box-shadow:var(--shadow-lg);border:1.5px solid rgba(139,61,240,.15);z-index:95}
+.book-list[hidden]{display:none}
+.book-list button{display:block;width:100%;text-align:left;padding:12px 14px;border:0;background:none;border-radius:12px;font:700 .95rem var(--rounded);color:var(--ink);cursor:pointer}
+.book-list button:hover,.book-list button:focus-visible{background:var(--lav-surface);outline:none}
+.nav-cta{display:none}
+.nav-cta h4{margin:12px 6px 4px;font:700 .8rem var(--rounded);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav-cta button{display:block;width:100%;text-align:left;padding:12px 16px;border:0;background:var(--blush-surface);border-radius:14px;margin-bottom:6px;font:700 .98rem var(--rounded);color:var(--blush-deep);cursor:pointer}
+/* page colour blocks */
+#page-flowers .page-hero{background:linear-gradient(135deg,#FFE0D2,#FFF0BF);border-radius:var(--r-lg);padding:clamp(22px,3vw,40px);margin-top:14px}
+#page-face .page-hero{background:linear-gradient(135deg,#E5D6FF,#CFEFFF);border-radius:var(--r-lg);padding:clamp(22px,3vw,40px);margin-top:14px}
+#page-art .page-hero{background:linear-gradient(135deg,#E3D2F2,#D2F0DC);border-radius:var(--r-lg);padding:clamp(22px,3vw,40px);margin-top:14px}
+@media (max-width:760px){.split-strip{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:400px){.nav-cta{display:block}}
+
 /* ============ Responsive ============ */
 @media (max-width:1080px){
   .nav-link{padding:9px 13px;font-size:.88rem}
@@ -1224,8 +1281,7 @@ fieldset.field{border:0;padding:0}
   .lightbox-card{width:min(560px,94vw)}
 }
 @media (max-width:400px){
-  .hdr-actions>.btn{display:none}
-  .nav-cta{display:block!important}
+  .hdr-actions>.book-menu{display:none}
 }
 @media (max-width:640px){
   body{font-size:16px}
@@ -1310,11 +1366,25 @@ fieldset.field{border:0;padding:0}
       <button class="nav-link" data-nav="face">Face Painting</button>
       <button class="nav-link" data-nav="art">Art</button>
       <button class="nav-link" data-nav="about">About &amp; Contact</button>
-      <button class="btn btn-coral nav-cta" data-nav="about" data-focus="inquiryForm" style="display:none">Book / Inquire</button>
+      <div class="nav-cta">
+        <h4>Book / Inquire</h4>
+        <button type="button" data-nav="flowers" data-focus="flowerFormSection">Order or reserve flowers</button>
+        <button type="button" data-nav="face" data-focus="quoteForm">Get a face painting quote</button>
+        <button type="button" data-nav="art" data-focus="artistsGrid">Ask about an art piece</button>
+        <button type="button" data-nav="about" data-focus="inquiryForm">General inquiry</button>
+      </div>
     </nav>
 
     <div class="hdr-actions">
-      <button class="btn btn-coral btn-sm" data-nav="about" data-focus="inquiryForm">Book / Inquire</button>
+      <div class="book-menu" id="bookMenu">
+        <button class="btn btn-coral btn-sm" type="button" id="bookBtn" aria-haspopup="true" aria-expanded="false" aria-controls="bookList">Book / Inquire</button>
+        <ul class="book-list" id="bookList" hidden>
+          <li><button type="button" data-nav="flowers" data-focus="flowerFormSection">Order or reserve flowers</button></li>
+          <li><button type="button" data-nav="face" data-focus="quoteForm">Get a face painting quote</button></li>
+          <li><button type="button" data-nav="art" data-focus="artistsGrid">Ask about an art piece</button></li>
+          <li><button type="button" data-nav="about" data-focus="inquiryForm">General inquiry</button></li>
+        </ul>
+      </div>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
@@ -1482,6 +1552,12 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+
+    <section class="section" aria-label="Sample testimonials">
+      <div class="sec-head reveal"><span class="eyebrow">What people say</span><h2>Kind words from the neighborhood.</h2></div>
+      <div class="testi-grid"><figure class="testi reveal"><span class="tag tag-amber">Sample testimonial</span><blockquote>The kids lined up for the butterfly designs and nobody wanted to leave the painting table. Easy to book and right on time.</blockquote><figcaption><span class="avatar " aria-hidden="true">JR</span><span>Jamie R.<small>Birthday face painting</small></span></figcaption></figure><figure class="testi reveal"><span class="tag tag-amber">Sample testimonial</span><blockquote>Our weekly bouquets brighten the whole salon. The stems always look like they were cut that morning.</blockquote><figcaption><span class="avatar is-coral" aria-hidden="true">MT</span><span>Morgan T.<small>Weekly flower subscription</small></span></figcaption></figure></div>
+      <p class="sample-line">These are sample reviews. Real client reviews will replace them.</p>
+    </section>
   </div>
 </section>
 <!-- ================= FLOWERS ================= -->
@@ -1518,6 +1594,16 @@ fieldset.field{border:0;padding:0}
         </div>
       </div>
     </section>
+
+    <section class="split-strip reveal" aria-label="Grower story">
+      <div>
+        <span class="eyebrow">Our plot, your table</span>
+        <h2>Flowers grown here.</h2>
+        <p>Every stem starts in a small Plattsburgh plot. We plant by season, cut in the cool of the morning and arrange the same day, so what you bring home is as fresh as the North Country allows. <span class="tag tag-amber">Sample text</span></p>
+      </div>
+      <div class="ph-frame" role="img" aria-label="Placeholder for a photo of the owner in her flower plot">Photo of the owner in her flower plot goes here</div>
+    </section>
+    <div class="cc-notice reveal"><p><b>Seasonal notice</b>Valentine's pre-orders and spring bookings are opening soon. <span class="tag tag-amber">Sample</span></p><button class="btn btn-coral btn-sm" type="button" data-nav="flowers" data-focus="flowerFormSection">Reserve a spot</button></div>
 
     <section class="section" id="flowerWays">
       <div class="sec-head reveal">
@@ -1583,6 +1669,7 @@ fieldset.field{border:0;padding:0}
           <button class="btn btn-soft preselect" data-select="Wedding Bouquet-Only">Ask about bouquet-only</button>
         </article>
       </div>
+      <div class="honesty reveal"><p><b>Good to know.</b> Every bouquet is made from whatever is blooming that week. Yours will match the colors and mood of our photos, though the exact stems may differ. That is what keeps it fresh.</p></div>
     </section>
 
     <section class="section" id="flowerFormSection">
@@ -1644,6 +1731,12 @@ fieldset.field{border:0;padding:0}
           <span class="hint">Prefer to talk? Call <b>(518) 555-0142</b>, we answer between arrangements.</span>
         </div>
       </form>
+    </section>
+
+    <section class="section" aria-label="Sample testimonials">
+      <div class="sec-head reveal"><span class="eyebrow">From recent customers</span><h2>Fresh from the plot.</h2></div>
+      <div class="testi-grid"><figure class="testi reveal"><span class="tag tag-amber">Sample testimonial</span><blockquote>I ordered a Mother's Day pre-order bouquet and it was gorgeous, full of colors I would never have picked myself.</blockquote><figcaption><span class="avatar " aria-hidden="true">SK</span><span>Sam K.<small>Seasonal pre-order</small></span></figcaption></figure></div>
+      <p class="sample-line">These are sample reviews. Real client reviews will replace them.</p>
     </section>
 
     <section class="section gal-section" id="flowerGallery" data-gal="flowers" aria-label="Flower photo gallery">
@@ -1745,6 +1838,30 @@ fieldset.field{border:0;padding:0}
       </div>
     </section>
 
+    <section class="section" id="addOns">
+      <div class="addons reveal">
+        <span class="eyebrow is-coral">Add to your party</span>
+        <h3>Make it sparkle.</h3>
+        <p class="lead">Mix and match with any package. <span class="tag tag-amber">Sample pricing</span></p>
+        <ul class="addon-list">
+          <li>Glitter tattoos <b>+$95</b></li>
+          <li>Festival glitter bar <b>+$95</b></li>
+          <li>Face gems for every child <b>+$65</b></li>
+          <li>Hair wraps or feathers <b>+$150</b></li>
+          <li>Party size upgrade, up to 20 children <b>+$75</b></li>
+        </ul>
+        <p class="sample-line">Hosting more than 20 children? Ask about booking a second artist so every guest is painted without a long wait.</p>
+        <div class="know-grid" aria-label="Good to know">
+          <div class="know"><b>Ages</b>Face painting for ages 3 and up, glitter tattoos for ages 4 and up.</div>
+          <div class="know"><b>Pace</b>About 8 to 12 children an hour for detailed designs, up to 20 for quick ones.</div>
+          <div class="know"><b>Travel</b>Plattsburgh and greater Clinton County, about 35 minutes out.</div>
+          <div class="know"><b>Booking</b>Weekend dates go fast, so reserve early.</div>
+        </div>
+        <p class="sample-line">All details on this card are samples for the client to confirm.</p>
+      </div>
+      <div class="cc-notice reveal" style="margin-top:24px"><p><b>Seasonal booking</b>Halloween 2027 details coming soon. Spring and summer dates are now open. <span class="tag tag-amber">Sample</span></p><button class="btn btn-coral btn-sm" type="button" data-nav="face" data-focus="quoteForm">Check a date</button></div>
+    </section>
+
     <section class="section" id="quoteSection">
       <div class="sec-head reveal">
         <span class="eyebrow is-coral">Smart event date &amp; quote checker</span>
@@ -1789,6 +1906,12 @@ fieldset.field{border:0;padding:0}
           <span class="hint">Nothing is booked until we confirm, this just starts the conversation.</span>
         </div>
       </form>
+    </section>
+
+    <section class="section" aria-label="Sample testimonials">
+      <div class="sec-head reveal"><span class="eyebrow">From recent events</span><h2>A happy line at the booth.</h2></div>
+      <div class="testi-grid"><figure class="testi reveal"><span class="tag tag-amber">Sample testimonial</span><blockquote>Calm, patient and so talented. Every child picked a design and walked away beaming.</blockquote><figcaption><span class="avatar is-green" aria-hidden="true">AP</span><span>Alex P.<small>School fundraiser booth</small></span></figcaption></figure></div>
+      <p class="sample-line">These are sample reviews. Real client reviews will replace them.</p>
     </section>
 
     <section class="section gal-section" id="faceGallery" data-gal="face" aria-label="Face painting photo gallery">
@@ -1839,6 +1962,11 @@ fieldset.field{border:0;padding:0}
         </div>
       </div>
     </section>
+
+    <div class="concept-grid">
+      <div class="concept is-plum reveal"><span class="tag">Sample concept</span><h3>Theme of the month: Winter Light</h3><p>Each month, our artists create or choose pieces around one shared theme, so there is always something new to browse.</p><button class="btn btn-soft btn-sm" type="button" data-scroll="artistsGrid">See the pieces</button></div>
+      <div class="concept is-leaf reveal"><span class="tag">Concept, to be confirmed with the client</span><h3>Art that gives back</h3><p>A portion of each sale could support a local cause chosen every month, so buying local art also helps the neighborhood.</p></div>
+    </div>
 
     <section class="section" id="artistsGrid">
       <div class="sec-head reveal">
@@ -2077,6 +2205,7 @@ fieldset.field{border:0;padding:0}
               <span>[Badge placeholder: link + reviews to be added]</span>
             </span>
           </div>
+        <div class="review-cta"><p>Enjoyed working with us? A short review helps neighbors find us.</p><button class="btn btn-coral btn-sm" type="button" disabled aria-disabled="true">Leave a review (link to come)</button></div>
 
           <div class="radius">
             <b>Service area:</b> Plattsburgh, Morrisonville, Schuyler Falls, Peru, Rouses Point, Cadyville and
@@ -3041,6 +3170,48 @@ fieldset.field{border:0;padding:0}
         try { sessionStorage.setItem('ccBanner', 'off'); } catch (e) {}
       });
     }
+  })();
+
+
+  /* Book / Inquire dropdown */
+  (function () {
+    var wrap = $('#bookMenu'), btn = $('#bookBtn'), list = $('#bookList');
+    if (!wrap || !btn || !list) return;
+    function setOpen(o) { list.hidden = !o; btn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(list.hidden); });
+    list.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { setOpen(false); btn.focus({ preventScroll: true }); } });
+  })();
+
+  /* Face painting filter pills (only groups with two or more photos) */
+  (function () {
+    var groups = {
+      'Superheroes': ['Batmans.webp', 'Joker.webp', 'IMG_5375.webp', 'Little__Hulk.webp', 'Spiderman_2.webp'],
+      'Animals': ['IMG_5088.webp', 'IMG_5381.webp', 'IMG_9858.webp', 'Puppy.webp'],
+      'Butterflies': ['IMG_5376.webp', 'Pina_and_silver_butterfly.webp', 'Rainbow_butterfly.webp']
+    };
+    var grid = document.querySelector('[data-grid="face"]');
+    if (!grid) return;
+    var bar = document.createElement('div');
+    bar.className = 'fpills';
+    bar.setAttribute('role', 'group');
+    bar.setAttribute('aria-label', 'Filter face painting designs');
+    ['All'].concat(Object.keys(groups)).forEach(function (name, k) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'fpill'; b.textContent = name;
+      b.setAttribute('aria-pressed', k === 0 ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        $$('.fpill', bar).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        $$('.g-item', grid).forEach(function (f) {
+          var src = (f.querySelector('img') || {}).getAttribute ? f.querySelector('img').getAttribute('src') : '';
+          var file = decodeURIComponent((src || '').split('/').pop());
+          f.classList.toggle('is-hidden', name !== 'All' && groups[name].indexOf(file) < 0);
+        });
+      });
+      bar.appendChild(b);
+    });
+    grid.parentNode.insertBefore(bar, grid);
   })();
 
   /* Init */
